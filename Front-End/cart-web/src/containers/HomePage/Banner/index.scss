@@ -1,0 +1,14 @@
+.banner {
+    .selectDepartments {
+        .departments {
+            height: 200px;
+            overflow: hidden;
+            background-color: greenyellow;
+
+            &:hover {
+                height: 0;
+                transition: height 3s;
+            }
+        }
+    }
+}
