@@ -33,4 +33,13 @@
             }
         }
     }
+
+    .contentWrapper {
+        .mainContent {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            padding: 10px;
+            background-color: $primaryWhite;
+        }
+    }
 }

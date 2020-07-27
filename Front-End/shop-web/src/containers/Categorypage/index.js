@@ -6,6 +6,7 @@ import { getAllCategories, getProductsByCategory } from '../../action/action';
 import './index.scss'
 import Loading from '../../components/Loading';
 import { useHistory } from 'react-router-dom';
+import ItemProducts from '../../components/ItemProducts';
 
 const { Sider, Content } = Layout;
 
@@ -15,7 +16,8 @@ export default function CategoryPage() {
     const categoriesState = useSelector(state => state.categories)
     const {
         loading,
-        categories
+        categories,
+        products,
     } = categoriesState;
 
     const [chosenCategory, setChosenCategory] = useState(() => {
@@ -24,19 +26,32 @@ export default function CategoryPage() {
     });
 
     useEffect(() => {
-        console.log(`effect 1`)
         dispatch(getAllCategories());
     }, [])
 
     useEffect(() => {
-        if (chosenCategory.length > 0) {
+        if (chosenCategory.length > 0 || chosenCategory) {
             dispatch(getProductsByCategory(chosenCategory));
         }
-    }, [chosenCategory])
+    }, [chosenCategory, categories])
 
     const handleChooseCategory = useCallback((id) => {
         setChosenCategory(id);
     }, [])
+
+    const renderProducts = (arr) => {
+        return arr.map(product => {
+            return (
+                <ItemProducts
+                    key={product.id}
+                    image={product.image}
+                    title={product.name}
+                    price={product.price}
+                    percent={product.percent}
+                />
+            )
+        })
+    }
 
     return (
         <div>
@@ -47,7 +62,7 @@ export default function CategoryPage() {
                     {
                         categories.map(item => {
                             return (
-                                <div className={`${chosenCategory === item.id ? 'menu__item-active' : 'menu__item'}`} key={item.id} onClick={() => handleChooseCategory(item.id)}>
+                                <div className={`${chosenCategory === Number.parseInt(item.id) ? 'menu__item-active' : 'menu__item'}`} key={item.id} onClick={() => handleChooseCategory(Number.parseInt(item.id))}>
                                     <EuroCircleOutlined style={{ fontSize: '20px', marginRight: '10px' }} />
                                     <span>{item.name}</span>
                                 </div>
@@ -56,7 +71,9 @@ export default function CategoryPage() {
                     }
                 </Sider>
                 <Layout className="contentWrapper">
-                    <Content className="mainContent">Content</Content>
+                    <Content className="mainContent">
+                        {renderProducts(products)}
+                    </Content>
                 </Layout>
             </Layout>
         </div>
