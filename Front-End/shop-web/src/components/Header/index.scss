@@ -1,0 +1,29 @@
+@import '../../utils/Color.scss';
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+
+    .menu {
+        .menuList {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+            margin-bottom: 0;
+
+            &__item {
+                padding: 12px;
+                color: $primaryGreen;
+                font-weight: 700;
+
+                &:hover,
+                &-active {
+                    border-bottom: 2px solid $primaryGreen;
+                }
+            }
+        }
+    }
+}
