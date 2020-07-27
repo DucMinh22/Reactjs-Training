@@ -1,0 +1,36 @@
+@import '../../utils/Color.scss';
+
+@mixin item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    color: $primaryBlack;
+    cursor: pointer;
+}
+
+.category {
+    .menu {
+        background-color: $primaryWhite;
+        text-align: center;
+
+        &__title {
+            font-size: 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        &__item {
+            @include item();
+
+            &:hover,
+            &-active {
+                @include item();
+
+                background-color: $primaryGreen;
+                color: $primaryWhite;
+            }
+        }
+    }
+}

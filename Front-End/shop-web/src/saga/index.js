@@ -1,9 +1,11 @@
-import { fork, all } from 'redux-saga/effects'
+import { all, cancel, fork } from 'redux-saga/effects'
 import productWatcher from './productSaga'
+import categoryWatcher from './categorySaga'
 
 export default function* rootSaga() {
-    console.log(`rootSaga`)
     yield all([
-        productWatcher(),
+        fork(productWatcher),
+        fork(categoryWatcher),
     ])
+
 }

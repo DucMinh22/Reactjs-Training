@@ -3,10 +3,10 @@ import axios from 'axios';
 class AxiosService {
     constructor() {
         const instance = axios.create({
-            // headers: {
-            //     'Authorization': `Bearer ${token}`,
-            //     'Content-Type': 'application/json',
-            // }
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+            }
         });
         instance.interceptors.response.use(this.handleSuccess, this.handleError);
         this.instance = instance;
