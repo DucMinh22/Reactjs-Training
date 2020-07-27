@@ -15,7 +15,7 @@ export default function HomePage() {
 
     // componentDidMount
     useEffect(() => {
-        dispatch(getAllProducts());
+        // dispatch(getAllProducts());
     }, [])
 
 
