@@ -2,6 +2,7 @@ import { all, takeLatest, call, put } from "redux-saga/effects";
 import { GET_ALL_PRODUCTS, GET_ALL_PRODUCTS_SUCCESS, GET_ALL_PRODUCTS_FAILURE } from '../action/constant'
 import axiosService from "../utils/axiosService";
 
+
 function* getProducts() {
     try {
         const res = yield call(() => axiosService.get(`https://5c6521b719df280014b6267d.mockapi.io/api/products`));
