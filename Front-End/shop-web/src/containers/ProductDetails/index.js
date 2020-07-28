@@ -7,7 +7,6 @@ import { ENDPOINT, GET_PRODUCTS_API, GET_CATEGORIES_API } from "../../constant";
 import Loading from '../../components/Loading';
 
 export default function Productdetails() {
-
   const history = useHistory();
   // console.log("history :>> ", history);
   const type = history.location.state.type;
@@ -39,6 +38,7 @@ export default function Productdetails() {
       {loading && <Loading />}
       <div className="container">
         <ProductRow
+          product={product}
           image={product.image}
           titleProduct={product.name}
           PriceProduct={product.price}
