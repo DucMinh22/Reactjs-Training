@@ -36,6 +36,7 @@ const categoriesReducer = (state = initialState, action) => {
         case GET_PRODUCTS_BY_CATEGORY:
             return {
                 ...state,
+                products: [],
                 loading: true,
             }
         case GET_PRODUCTS_BY_CATEGORY_SUCCESS:

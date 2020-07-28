@@ -11,26 +11,11 @@ import ItemProducts from "../ItemProducts/index";
 export default function ProductItem() {
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
-  console.log(products);
-
-  // const DataCategories =  products.filter(product => product.categoryId === 2 )
-  // const mappingDataUser = () => DataCategories.map((value, key) => (
-  //   <div className="wrapper-item col">
-  //     <ItemProducts
-  //       key={key}
-  //       image={value.image}
-  //       title={value.name}
-  //       price={value.price}
-  //       percent={value.percent}
-  //     ></ItemProducts>
-  //   </div>
-  // ))
 
   const renderData = (categoryId) => {
     const data = products.filter(
       (product) => product.categoryId === categoryId
     );
-    console.log("data :>> ", data);
     return data.map((value, key) => (
       <div className="wrapper-item col">
         <ItemProducts
@@ -76,7 +61,6 @@ export default function ProductItem() {
       <div className="container">
         <div className="category">
           <h4>Computers</h4>
-
           {rederLink(1)}
         </div>
         <div className="category">

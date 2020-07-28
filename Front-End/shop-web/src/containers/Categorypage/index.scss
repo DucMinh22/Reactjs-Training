@@ -40,6 +40,10 @@
             grid-template-columns: auto auto auto;
             padding: 10px;
             background-color: $primaryWhite;
+
+            &__item {
+                padding: 10px;
+            }
         }
     }
 }

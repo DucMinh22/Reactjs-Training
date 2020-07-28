@@ -23,7 +23,7 @@ export default function CategoryPage() {
 
     const [chosenCategory, setChosenCategory] = useState(() => {
         const categoryName = history.location.state?.chosen;
-        return categoryName || "";
+        return categoryName || 1;
     });
 
     useEffect(() => {
@@ -34,7 +34,7 @@ export default function CategoryPage() {
         if (chosenCategory.length > 0 || chosenCategory) {
             dispatch(getProductsByCategory(chosenCategory));
         }
-    }, [chosenCategory, categories])
+    }, [chosenCategory])
 
     const handleChooseCategory = useCallback((id) => {
         setChosenCategory(id);
@@ -43,15 +43,17 @@ export default function CategoryPage() {
     const renderProducts = (arr) => {
         return arr.map(product => {
             return (
-                <ItemProducts
-                    type="category "
-                    id={product.id}
-                    key={product.id}
-                    image={product.image}
-                    title={product.name}
-                    price={product.price}
-                    percent={product.percent}
-                />
+                <div className="mainContent__item">
+                    <ItemProducts
+                        type="category "
+                        id={product.id}
+                        key={product.id}
+                        image={product.image}
+                        title={product.name}
+                        price={product.price}
+                        percent={product.percent}
+                    />
+                </div>
             )
         })
     }

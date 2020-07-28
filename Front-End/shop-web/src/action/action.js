@@ -1,4 +1,12 @@
-import { GET_ALL_PRODUCTS, GET_ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORY, GET_INFO_PRODUCTS, REMOVE_ALL_PRODUCTS } from "./actionTypes"
+import {
+    GET_ALL_PRODUCTS,
+    GET_ALL_CATEGORIES,
+    GET_PRODUCTS_BY_CATEGORY,
+    GET_INFO_PRODUCTS,
+    REMOVE_ALL_PRODUCTS,
+    ADD_TO_CART,
+    REMOVE_FROM_CART
+} from "./actionTypes"
 
 export const getAllProducts = () => {
     return {
@@ -29,5 +37,19 @@ export const getInfoProducts = (products) => {
 export const removeAllCartProducts = () => {
     return {
         type: REMOVE_ALL_PRODUCTS,
+    }
+}
+
+export const addToCart = (product) => {
+    return {
+        type: ADD_TO_CART,
+        product,
+    }
+}
+
+export const removeFromCart = (productId) => {
+    return {
+        type: REMOVE_FROM_CART,
+        productId,
     }
 }
