@@ -1,4 +1,4 @@
-import { REMOVE_ALL_PRODUCTS } from "../action/actionTypes";
+import { REMOVE_ALL_PRODUCTS, ADD_TO_CART, REMOVE_FROM_CART } from "../action/actionTypes";
 
 const initialState = {
     cartProducts: [],
@@ -10,6 +10,18 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartProducts: []
+            }
+        case ADD_TO_CART:
+            const newCart = [...state.cartProducts, action.product];
+            return {
+                ...state,
+                cartProducts: newCart
+            }
+        case REMOVE_FROM_CART:
+            const cart = [...state.cartProducts].filter(product => product.id !== action.productId);
+            return {
+                ...state,
+                cartProducts: cart
             }
         default:
             return state;

@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Button } from 'antd';
 import { DoubleRightOutlined } from '@ant-design/icons';
 import {
-    BrowserRouter as Router,
-    Link
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Link
+} from "react-router-dom";
 import "./index.scss";
 import axios from "axios";
 import DetailsItem from "./DetailsItem";
@@ -14,26 +14,9 @@ import ItemProducts from "../ItemProducts/index";
 export default function ProductItem() {
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
-  console.log(products);
-  
-  // const DataCategories =  products.filter(product => product.categoryId === 2 )
-  // const mappingDataUser = () => DataCategories.map((value, key) => (
-  //   <div className="wrapper-item col">
-  //     <ItemProducts
-  //       key={key}
-  //       image={value.image}
-  //       title={value.name}
-  //       price={value.price}
-  //       percent={value.percent}
-  //     ></ItemProducts>
-  //   </div>
-  // ))
-
-
 
   const renderData = (categoryId) => {
     const data = products.filter(product => product.categoryId === categoryId);
-    console.log('data :>> ', data);
     return data.map((value, key) => (
       <div className="wrapper-item col">
         <ItemProducts
@@ -52,34 +35,34 @@ export default function ProductItem() {
   return (
     <div>
       <div className="container">
-            <div className = "category">
-              <h4>Computers</h4>
-                    <Link to={{
-                        pathname: '/category',
-                        state: { chosen: 2 }
-                    }}>
-                        <Button 
-                            style ={{ float : "right", color : '#7fad39', border : '1px solid #7fad39'}}>View more <DoubleRightOutlined /> 
-                        </Button>
-                    </Link>
-                <div className="row" style={{width : '100%'}}>    
-                {renderData(2)}
-                </div>
-            </div>
-            <div className = "category">
-            <h4>Clothing</h4>
-                <Link to={{
-                        pathname: '/category',
-                        state: { chosen: 7 }
-                    }}>
-                        <Button 
-                            style ={{ float : "right", color : '#7fad39', border : '1px solid #7fad39'}}>View more <DoubleRightOutlined /> 
-                        </Button>
-                    </Link>
-                <div className="row" style={{width : '100%'}}>    
-                {renderData(7)}
-                </div>
-            </div>
+        <div className="category">
+          <h4>Computers</h4>
+          <Link to={{
+            pathname: '/category',
+            state: { chosen: 2 }
+          }}>
+            <Button
+              style={{ float: "right", color: '#7fad39', border: '1px solid #7fad39' }}>View more <DoubleRightOutlined />
+            </Button>
+          </Link>
+          <div className="row" style={{ width: '100%' }}>
+            {renderData(2)}
+          </div>
+        </div>
+        <div className="category">
+          <h4>Clothing</h4>
+          <Link to={{
+            pathname: '/category',
+            state: { chosen: 7 }
+          }}>
+            <Button
+              style={{ float: "right", color: '#7fad39', border: '1px solid #7fad39' }}>View more <DoubleRightOutlined />
+            </Button>
+          </Link>
+          <div className="row" style={{ width: '100%' }}>
+            {renderData(7)}
+          </div>
+        </div>
       </div>
     </div>
   );

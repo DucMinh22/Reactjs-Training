@@ -11,8 +11,6 @@ export default function HomePage() {
     const stateProducts = useSelector(state => state.products);
     const { products } = stateProducts;
 
-    console.log('state', products)
-
     // componentDidMount
     useEffect(() => {
         // dispatch(getAllProducts());
@@ -27,7 +25,7 @@ export default function HomePage() {
     }, [dispatch]);
 
     return (
-        <div>            
+        <div>
             <ProductItem />
         </div>
     )
