@@ -43,6 +43,8 @@ export default function CategoryPage() {
         return arr.map(product => {
             return (
                 <ItemProducts
+                    type="category "
+                    id={product.id}
                     key={product.id}
                     image={product.image}
                     title={product.name}

@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORY, GET_INFO_PRODUCTS } from "./constant"
+import { GET_ALL_PRODUCTS, GET_ALL_CATEGORIES, GET_PRODUCTS_BY_CATEGORY, GET_INFO_PRODUCTS, REMOVE_ALL_PRODUCTS } from "./constant"
 
 export const getAllProducts = () => {
     return {
@@ -26,3 +26,8 @@ export const getInfoProducts = (products) => {
     }
 }
 
+export const removeAllCartProducts = () => {
+    return {
+        type: REMOVE_ALL_PRODUCTS,
+    }
+}

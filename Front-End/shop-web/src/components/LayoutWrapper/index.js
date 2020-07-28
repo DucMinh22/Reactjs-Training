@@ -9,7 +9,7 @@ export default function Layout({ component, getProps, ...rest }) {
         <Container {...rest}>
             <Header />
             <Component {...getProps} />
-            <Footer />
+            {/* <Footer /> */}
         </Container>
     )
 }

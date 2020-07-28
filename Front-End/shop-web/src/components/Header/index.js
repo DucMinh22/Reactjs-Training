@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import LOGO from '../../assets/images/logo1.png'
 
 import './index.scss'
@@ -27,6 +27,8 @@ const MENU = [
 ]
 
 export default function Header() {
+    const history = useHistory();
+
     return (
         <Row className="header">
             <Col span={16}>
@@ -42,6 +44,7 @@ export default function Header() {
                                 <NavLink exact={item.exact} className="menuList__item" activeClassName="menuList__item-active" to={item.to}>
                                     {item.name}
                                 </NavLink>
+                                <div className={`${history.location.pathname === item.to ? 'hr-active' : 'hr'}`}></div>
                             </li>
                         )}
                     </ul>
