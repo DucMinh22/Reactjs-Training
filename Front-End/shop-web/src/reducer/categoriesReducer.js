@@ -5,7 +5,7 @@ import {
     GET_PRODUCTS_BY_CATEGORY,
     GET_PRODUCTS_BY_CATEGORY_FAILURE,
     GET_PRODUCTS_BY_CATEGORY_SUCCESS
-} from "../action/constant";
+} from "../action/actionTypes";
 
 const initialState = {
     loading: false,

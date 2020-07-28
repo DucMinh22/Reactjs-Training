@@ -1,4 +1,4 @@
-import { REMOVE_ALL_PRODUCTS } from "../action/constant";
+import { REMOVE_ALL_PRODUCTS } from "../action/actionTypes";
 
 const initialState = {
     cartProducts: [],

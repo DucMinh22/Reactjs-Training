@@ -1,4 +1,4 @@
-import { GET_ALL_PRODUCTS, GET_ALL_PRODUCTS_SUCCESS, GET_ALL_PRODUCTS_FAILURE, GET_INFO_PRODUCTS } from "../action/constant";
+import { GET_ALL_PRODUCTS, GET_ALL_PRODUCTS_SUCCESS, GET_ALL_PRODUCTS_FAILURE, GET_INFO_PRODUCTS } from "../action/actionTypes";
 
 const initialState = {
     products: [],
@@ -25,12 +25,11 @@ const productsReducer = (state = initialState, action) => {
         //         error: action.payload,
         //         loading: false,
         //     }
-            case GET_INFO_PRODUCTS:
-                console.log(action.a);
-                return{
-                ...state, 
+        case GET_INFO_PRODUCTS:
+            return {
+                ...state,
                 products: action.a,
-                }
+            }
         default:
             return state;
     }
