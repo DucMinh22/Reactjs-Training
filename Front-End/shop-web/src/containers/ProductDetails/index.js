@@ -3,7 +3,7 @@ import "./index.scss";
 import ProductRow from "./ProductsRow";
 import { useHistory } from "react-router-dom";
 import axiosService from "../../utils/axiosService";
-import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
+import { ENDPOINT, GET_PRODUCTS_API, GET_CATEGORIES_API } from "../../constant";
 import Loading from '../../components/Loading';
 
 export default function Productdetails() {
@@ -12,8 +12,9 @@ export default function Productdetails() {
   // console.log("history :>> ", history);
   const type = history.location.state.type;
   const id = history.location.state.id;
+  const categoryId = history.location.state.categoryId;
   const [product, setProduct] = useState({});
-  // const { type, id } = history.location.state;
+  // const { type, id, categoryId } = history.location.state;
 
   const [loading, setLoading] = useState(false);
 
@@ -21,20 +22,17 @@ export default function Productdetails() {
     setLoading(true);
     const fetchData = async () => {
       if (type === "home") {
-        console.log(`go home`);
         const res = await axiosService.get(`${ENDPOINT}${GET_PRODUCTS_API}/${id}`)
-        console.log('res :>> ', res);
         setProduct(res.data)
         setLoading(false);
       } else {
-        console.log(`go category`);
+        const res2 = await axiosService.get(`${ENDPOINT}${GET_CATEGORIES_API}/${categoryId}/products/${id}`);
+        setProduct(res2.data)
+        setLoading(false);
       }
     };
-
     fetchData();
   }, []);
-
-  console.log('product :>> ', product);
 
   return (
     <div>

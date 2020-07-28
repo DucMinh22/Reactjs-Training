@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState, useEffect } from 'react'
+import React, { useCallback, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './index.scss'
 import { Row, Col, Button, message } from 'antd'
@@ -28,7 +28,7 @@ export default function CartPage() {
             <div className="cartList__item" key={product.id}>
                 <Row>
                     <Col span={9}>
-                        <img className="itemImg" alt="item1" />
+                        <img className="itemImg" alt="item1" src={product.image} />
                     </Col>
                     <Col span={15}>
                         <Row className="info">
@@ -41,9 +41,9 @@ export default function CartPage() {
                             </Col>
                             <Col span={15}>
                                 <div className="info__content">
-                                    <p className="name">{product.name}</p>
-                                    <p className="category">{product.category}</p>
-                                    <p className="price">${product.price}</p>
+                                    <p className="name">{product.name || "No name"}</p>
+                                    <p className="category">{product.category || "No category"}</p>
+                                    <p className="price">${product.price || "No price"}</p>
                                 </div>
                             </Col>
                             <Col span={5}>
@@ -60,7 +60,7 @@ export default function CartPage() {
         ))
     }
 
-    const total = cartProducts.reduce((total, currentItem) => total + currentItem.price, 0);
+    const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price), 0);
 
     const removeAllProducts = useCallback(() => {
         dispatch(removeAllCartProducts());

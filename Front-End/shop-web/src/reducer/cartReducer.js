@@ -18,6 +18,7 @@ const cartReducer = (state = initialState, action) => {
                 cartProducts: newCart
             }
         case REMOVE_FROM_CART:
+            console.log('productId', action.productId)
             const cart = [...state.cartProducts].filter(product => product.id !== action.productId);
             return {
                 ...state,

@@ -12,7 +12,6 @@ const { Sider, Content } = Layout;
 
 export default function CategoryPage() {
     const history = useHistory();
-    console.log("history :>> ", history);
     const dispatch = useDispatch();
     const categoriesState = useSelector(state => state.categories)
     const {
@@ -43,7 +42,7 @@ export default function CategoryPage() {
     const renderProducts = (arr) => {
         return arr.map(product => {
             return (
-                <div className="mainContent__item">
+                <div className="mainContent__item" key={product.id}>
                     <ItemProducts
                         type="category "
                         id={product.id}
@@ -52,6 +51,7 @@ export default function CategoryPage() {
                         title={product.name}
                         price={product.price}
                         percent={product.percent}
+                        categoryId={chosenCategory}
                     />
                 </div>
             )
