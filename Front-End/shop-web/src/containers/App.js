@@ -5,6 +5,7 @@ import CategoryPage from './Categorypage';
 import HomePage from './Homepage';
 
 import 'antd/dist/antd.css';
+import Productdetails from './ProductDetails';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     <Switch>
       <Route exact path="/" render={() => <Layout component={HomePage} />} />
       <Route exact path="/category" render={() => <Layout component={CategoryPage} />} />
+      <Route exact path="/ProductsDetail" render={() => <Layout component={Productdetails} />} />
     </Switch>
   );
 }
