@@ -12,6 +12,7 @@ const { Sider, Content } = Layout;
 
 export default function CategoryPage() {
     const history = useHistory();
+    console.log("history :>> ", history);
     const dispatch = useDispatch();
     const categoriesState = useSelector(state => state.categories)
     const {

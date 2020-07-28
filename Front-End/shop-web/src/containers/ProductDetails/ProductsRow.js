@@ -19,7 +19,7 @@ import { Rate, InputNumber } from 'antd';
                           <Rate defaultValue={4} />
                           <div className="static-number">(18 reviewers)</div>
                         </div>
-                        <div className="product__details__price">{PriceProduct}</div>
+                        <div className="product__details__price">{PriceProduct}đ</div>
                         <div className="description">
                             {description}
                         </div>

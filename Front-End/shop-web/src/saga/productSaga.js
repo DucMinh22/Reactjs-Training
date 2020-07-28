@@ -1,5 +1,5 @@
 import { all, takeLatest, call, put } from "redux-saga/effects";
-import { GET_ALL_PRODUCTS, GET_ALL_PRODUCTS_SUCCESS, GET_ALL_PRODUCTS_FAILURE } from '../action/constant'
+import { GET_ALL_PRODUCTS, GET_ALL_PRODUCTS_SUCCESS, GET_ALL_PRODUCTS_FAILURE } from '../action/actionTypes'
 import axiosService from "../utils/axiosService";
 
 

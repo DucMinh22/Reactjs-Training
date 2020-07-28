@@ -9,7 +9,7 @@ import Loading from '../../components/Loading';
 export default function Productdetails() {
 
   const history = useHistory();
-  console.log("history :>> ", history);
+  // console.log("history :>> ", history);
   const type = history.location.state.type;
   const id = history.location.state.id;
   const [product, setProduct] = useState({});
@@ -41,9 +41,9 @@ export default function Productdetails() {
       {loading && <Loading />}
       <div className="container">
         <ProductRow
-          image="https://colorlib.com/preview/theme/ogani/img/product/details/product-details-1.jpg"
-          titleProduct="Vetgetable’s Package"
-          PriceProduct="50.000đ"
+          image={product.image}
+          titleProduct={product.name}
+          PriceProduct={product.price}
           description="   Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus."
         />
       </div>
