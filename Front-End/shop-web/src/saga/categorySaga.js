@@ -17,9 +17,14 @@ function* getCategories() {
 }
 
 function* getProductsByCategory(action) {
-    const { categoryId } = action;
+    const { categoryId, option } = action;
+    let res;
     try {
-        const res = yield call(() => axiosService.get(`${ENDPOINT}${GET_CATEGORIES_API}/${categoryId}/products`));
+        if (option.order?.length > 0 && option.sortBy?.length > 0) {
+            res = yield call(() => axiosService.get(`${ENDPOINT}${GET_CATEGORIES_API}/${categoryId}/products?sortBy=${option.sortBy}&order=${option.order || 'desc'}`));
+        } else {
+            res = yield call(() => axiosService.get(`${ENDPOINT}${GET_CATEGORIES_API}/${categoryId}/products?page=${option.page}&limit=6`));
+        }
         if (res.data?.length > 0) {
             yield put({ type: GET_PRODUCTS_BY_CATEGORY_SUCCESS, payload: res.data });
         } else {

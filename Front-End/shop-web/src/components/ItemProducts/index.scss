@@ -1,0 +1,38 @@
+$color-text : rgb(120, 120, 120);
+$font-text-small: 13px;
+
+.frame {
+    img {
+        width: 258px;
+    }
+
+    .title-product {
+        color: $font-text-small;
+        margin-top: 10px;
+
+        p {
+            margin-bottom: 5px;
+        }
+    }
+
+    .price {
+        display: flex;
+
+        p {
+            margin-right: 13px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        p2 {
+            color: $color-text;
+            font-size: $font-text-small;
+        }
+    }
+
+    .origin-price {
+        color: $color-text;
+        font-size: $font-text-small;
+        text-decoration: line-through;
+    }
+}

@@ -5,6 +5,7 @@
     justify-content: space-between;
     align-items: center;
     height: 100px;
+    background-color: $primaryWhite;
 
     .menu {
         .menuList {
@@ -15,9 +16,17 @@
             margin-bottom: 0;
 
             &__item {
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 padding: 12px 12px 0;
                 color: $primaryGreen;
                 font-weight: 700;
+
+                .itemIcon {
+                    display: flex;
+                    align-items: center;
+                }
             }
 
             li {

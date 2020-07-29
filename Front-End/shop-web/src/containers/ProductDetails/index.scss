@@ -1,31 +1,37 @@
-.container{
-    .row{
-        
-        .info-product{
-            .rate{
+.container {
+    .row {
+
+        .info-product {
+            .rate {
                 display: flex;
-                .ant-rate{
+
+                .ant-rate {
                     font-size: 15px !important;
                 }
-                .static-number{
+
+                .static-number {
                     color: #dd2222;
                     margin-left: 10px;
                     font-weight: 700px;
                 }
             }
-            .product__details__price{
+
+            .product__details__price {
                 font-size: 30px;
                 color: #dd2222;
                 font-weight: 600;
                 margin: 15px 0 15px 0;
             }
-            .add-to-card{
+
+            .add-to-card {
                 margin: 20px 0;
                 display: flex;
-                .ant-input-number-input{
+
+                .ant-input-number-input {
                     border: 1px solid #7fad39;
                 }
             }
+
             .primary-btn {
                 font-size: 14px;
                 padding: 10px 28px 10px;
@@ -37,5 +43,12 @@
                 margin-left: 10px;
             }
         }
+    }
+
+    .relatedField {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
     }
 }

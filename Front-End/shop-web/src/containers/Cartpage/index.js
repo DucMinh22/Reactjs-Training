@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
 import { Row, Col, Button, message } from "antd";
@@ -6,59 +6,75 @@ import { DeleteOutlined } from "@ant-design/icons";
 import Button1 from "../../components/Button";
 import Loading from "../../components/Loading";
 import { removeAllCartProducts, removeFromCart } from "../../action/action";
+import BreadCrumb from "../../components/Breadcrumb";
+import { Link } from "react-router-dom";
 
 export default function CartPage() {
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const cartReducer = useSelector((state) => state.cart);
-  const { cartProducts } = cartReducer;
-  let timer;
+    const [loading, setLoading] = useState(false);
+    const dispatch = useDispatch();
+    const cartReducer = useSelector((state) => state.cart);
+    const { cartProducts } = cartReducer;
+    let timer;
 
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [cartProducts]);
+    useEffect(() => {
+        return () => {
+        clearTimeout(timer);
+        };
+    }, [cartProducts]);
 
     // render Item for cart
     const renderItemCart = (arr) => {
         return arr.map(product => (
             <div className="cartList__item" key={product.id}>
-                <Row>
-                    <Col span={9}>
-                        <img className="itemImg" alt="item1" src={product.image} />
-                    </Col>
-                    <Col span={15}>
-                        <Row className="info">
-                            <Col span={4}>
+                    <Row>
+                        <Col span={9}>
+                            <Link 
+                                to={{
+                                    pathname: `/ProductsDetail/${product.id}`,
+                                    state: {
+                                            id: product.id,
+                                            categoryId: product.categoryId,
+                                            type: product.type
+                                        }
+                                    }}
+                            >
+                                <img className="itemImg" alt="item1" src={product.image} />
+                            </Link>
+                        </Col>
+
+                        <Col span={15}>
+                            <Row className="info">
+                                <Col span={4}>
                                 <div className="info__field">
                                     <p>Name: </p>
                                     <p>Category: </p>
                                     <p>Price: </p>
+                                    <p>Quantity: </p>
                                 </div>
-                            </Col>
-                            <Col span={15}>
+                                </Col>
+                                <Col span={15}>
                                 <div className="info__content">
                                     <p className="name">{product.name || "No name"}</p>
                                     <p className="category">{product.category || "No category"}</p>
                                     <p className="price">${product.price || "No price"}</p>
+                                    <p className="price">{product.quantity || "1"}</p>
                                 </div>
-                            </Col>
-                            <Col span={5}>
+                                </Col>
+                                <Col span={5}>
                                 <div className="more">
-                                    <Button className="delete">
-                                        <DeleteOutlined  onClick={() =>removeItemProducts(product.id)}/>
+                                    <Button className="delete" onClick={() => removeItemProducts(product.id)}>
+                                    <DeleteOutlined />
                                     </Button>
                                 </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
+                                </Col>
+                            </Row>
+                        </Col>
+                    </Row>
             </div>
         ))
     }
 
-    const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price), 0);
+  const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price)*Number.parseInt(currentItem.quantity), 0);
 
   const removeItemProducts = useCallback(
     (productid) => {
@@ -80,9 +96,17 @@ export default function CartPage() {
     }, 1000);
   }, [cartProducts, dispatch]);
 
+  const linksBreadCrumb = [
+    {
+      name: 'Home',
+      to: '/'
+    }
+  ]
+
   return (
     <div className="cartPage">
       {loading && <Loading />}
+      <BreadCrumb links={linksBreadCrumb} nameActivePage={"Cart"}/>
       <p style={{ fontWeight: "700" }}>
         Total products in your cart: {cartProducts.length}
       </p>

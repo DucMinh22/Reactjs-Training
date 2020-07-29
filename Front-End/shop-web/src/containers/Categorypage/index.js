@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react'
-import { Layout } from 'antd'
+import { Layout, Select } from 'antd'
 import { EuroCircleOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategories, getProductsByCategory } from '../../action/action';
@@ -7,6 +7,8 @@ import './index.scss'
 import Loading from '../../components/Loading';
 import { useHistory } from 'react-router-dom';
 import ItemProducts from '../../components/ItemProducts';
+import Button from '../../components/Button';
+import BreadCrumb from '../../components/Breadcrumb';
 
 const { Sider, Content } = Layout;
 
@@ -19,11 +21,18 @@ export default function CategoryPage() {
         categories,
         products,
     } = categoriesState;
-
     const [chosenCategory, setChosenCategory] = useState(() => {
         const categoryName = history.location.state?.chosen;
         return categoryName || 1;
     });
+    const [order, setOrder] = useState("");
+    const [sortBy, setSortBy] = useState("");
+    const [option, setOption] = useState({
+        page: 1,
+        sortBy: '',
+        order: '',
+    });
+
 
     useEffect(() => {
         dispatch(getAllCategories());
@@ -31,13 +40,32 @@ export default function CategoryPage() {
 
     useEffect(() => {
         if (chosenCategory.length > 0 || chosenCategory) {
-            dispatch(getProductsByCategory(chosenCategory));
+            dispatch(getProductsByCategory(chosenCategory, option));
         }
-    }, [chosenCategory])
+    }, [chosenCategory, option])
 
     const handleChooseCategory = useCallback((id) => {
         setChosenCategory(id);
+        setOption(prevState => {
+            return {
+                ...prevState,
+                page: 1,
+                order: "",
+                sortBy: "",
+            }
+        })
+        setOrder('');
+        setSortBy('')
     }, [])
+
+    const handleLoadMore = () => {
+        setOption(prevState => {
+            return {
+                ...prevState,
+                page: prevState.page + 1
+            }
+        })
+    }
 
     const renderProducts = (arr) => {
         return arr.map(product => {
@@ -58,6 +86,33 @@ export default function CategoryPage() {
         })
     }
 
+    const handleChangeType = useCallback((value) => {
+        setSortBy(value);
+    }, []);
+
+    const handleChangeOrder = useCallback((value) => {
+        setOrder(value)
+    }, []);
+
+    const handleSearch = useCallback(() => {
+
+        setOption(prev => {
+            return {
+                ...prev,
+                order: order,
+                sortBy: sortBy,
+                page: 1,
+            }
+        })
+    }, [option, order, sortBy]);
+
+    const linksBreadCrumb = [
+        {
+            name: 'Home',
+            to: '/'
+        },
+    ]
+
     return (
         <div>
             {loading && <Loading />}
@@ -76,9 +131,28 @@ export default function CategoryPage() {
                     }
                 </Sider>
                 <Layout className="contentWrapper">
+                    <BreadCrumb links={linksBreadCrumb} nameActivePage={'Category'} />
+                    <div className="optionField">
+                        <div className="optionField__item">
+                            <Select style={{ width: 120 }} onChange={handleChangeType} value={sortBy}>
+                                <Select.Option value="price">Price</Select.Option>
+                                <Select.Option value="createdAt">Create Date</Select.Option>
+                            </Select>
+                        </div>
+                        <div className="optionField__item">
+                            <Select style={{ width: 120 }} onChange={handleChangeOrder} value={order}>
+                                <Select.Option value="asc">Increment</Select.Option>
+                                <Select.Option value="desc">Decrement</Select.Option>
+                            </Select>
+                        </div>
+                        <Button onClick={handleSearch}>Search</Button>
+                    </div>
                     <Content className="mainContent">
                         {renderProducts(products)}
                     </Content>
+                    <div className="loadMoreField">
+                        <Button onClick={handleLoadMore} disabled={sortBy && order}>More</Button>
+                    </div>
                 </Layout>
             </Layout>
         </div>
