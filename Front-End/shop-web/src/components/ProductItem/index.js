@@ -11,13 +11,12 @@ import ItemProducts from "../ItemProducts/index";
 export default function ProductItem() {
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
-
   const renderData = (categoryId) => {
     const data = products.filter(
       (product) => product.categoryId === categoryId
     );
     return data.map((value, key) => (
-      <div className="wrapper-item col">
+      <div className="wrapper-item">
         <ItemProducts
           key={key}
           id={value.id}

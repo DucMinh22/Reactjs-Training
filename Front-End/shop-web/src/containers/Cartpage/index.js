@@ -20,45 +20,52 @@ export default function CartPage() {
     };
   }, [cartProducts]);
 
-    // render Item for cart
-    const renderItemCart = (arr) => {
-        return arr.map(product => (
-            <div className="cartList__item" key={product.id}>
-                <Row>
-                    <Col span={9}>
-                        <img className="itemImg" alt="item1" src={product.image} />
-                    </Col>
-                    <Col span={15}>
-                        <Row className="info">
-                            <Col span={4}>
-                                <div className="info__field">
-                                    <p>Name: </p>
-                                    <p>Category: </p>
-                                    <p>Price: </p>
-                                </div>
-                            </Col>
-                            <Col span={15}>
-                                <div className="info__content">
-                                    <p className="name">{product.name || "No name"}</p>
-                                    <p className="category">{product.category || "No category"}</p>
-                                    <p className="price">${product.price || "No price"}</p>
-                                </div>
-                            </Col>
-                            <Col span={5}>
-                                <div className="more">
-                                    <Button className="delete">
-                                        <DeleteOutlined  onClick={() =>removeItemProducts(product.id)}/>
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Col>
-                </Row>
-            </div>
-        ))
-    }
+  // render Item for cart
+  const renderItemCart = (arr) => {
+    return arr.map((product) => (
+      <div className="cartList__item" key={product.id}>
+        <Row>
+          <Col span={9}>
+            <img className="itemImg" alt="item1" src={product.image} />
+          </Col>
+          <Col span={15}>
+            <Row className="info">
+              <Col span={4}>
+                <div className="info__field">
+                  <p>Name: </p>
+                  <p>Category: </p>
+                  <p>Price: </p>
+                </div>
+              </Col>
+              <Col span={15}>
+                <div className="info__content">
+                  <p className="name">{product.name || "No name"}</p>
+                  <p className="category">
+                    {product.category || "No category"}
+                  </p>
+                  <p className="price">${product.price || "No price"}</p>
+                </div>
+              </Col>
+              <Col span={5}>
+                <div className="more">
+                  <Button className="delete">
+                    <DeleteOutlined
+                      onClick={() => removeItemProducts(product.id)}
+                    />
+                  </Button>
+                </div>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </div>
+    ));
+  };
 
-    const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price), 0);
+  const total = cartProducts.reduce(
+    (total, currentItem) => total + Number.parseInt(currentItem.price),
+    0
+  );
 
   const removeItemProducts = useCallback(
     (productid) => {
