@@ -12,7 +12,8 @@ const cartReducer = (state = initialState, action) => {
                 cartProducts: []
             }
         case ADD_TO_CART:
-            const index = state.cartProducts.indexOf(action.product);
+            const arrCartProductId = state.cartProducts.map(item => item.id);
+            const index = arrCartProductId.indexOf(action.product.id);
             let newCart;
             if (index !== -1) {
                 let updateProduct = { ...state.cartProducts[index], quantity: state.cartProducts[index].quantity + action.product.quantity };

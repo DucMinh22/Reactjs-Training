@@ -40,7 +40,6 @@ const categoriesReducer = (state = initialState, action) => {
                 loading: true,
             }
         case GET_PRODUCTS_BY_CATEGORY_SUCCESS:
-            console.log([...state.products, ...action.payload])
             return {
                 ...state,
                 products: [...state.products, ...action.payload],
