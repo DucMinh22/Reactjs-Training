@@ -37,8 +37,8 @@ export default function Productdetails() {
     const productsByCategory = products.filter(item => item.categoryId === Number.parseInt(categoryId));
     const related = productsByCategory.splice(0, 5);
 
-    setRelatedProducts(related);
-    fetchData();
+    setRelatedProducts(related)
+    fetchData()
   }, [id, categoryId]);
 
   const linksBreadCrumb = [
