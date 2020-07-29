@@ -5,15 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import axiosService from "../../utils/axiosService";
 import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
 import { getInfoProducts, searchProduct } from "../../action/action";
+import { useHistory } from "react-router-dom";
 export default function Search() {
   const dispatch = useDispatch();
   const stateSearch = useSelector((state) => state.products);
   const search = stateSearch.searchProducts;
-  console.log("search", search);
+  const history = useHistory();
+
+  console.log(history.location.state.key);
 
   const dataSearch = search.map((item, key) => (
     <div className="wrapper-item">
       <ItemProducts
+        type="home"
         key={key}
         id={item.id}
         image={item.image}
@@ -27,7 +31,7 @@ export default function Search() {
 
   return (
     <div>
-      <h3>Searching result : "làm đẹp"</h3>
+      <h3>Searching result : {history.location.state.key} </h3>
       <div className="search-title">
         <h4>Product</h4>
       </div>

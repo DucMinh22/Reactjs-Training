@@ -27,7 +27,6 @@ export default function HomePage() {
     <div>
       <Banner />
       <ProductItem />
-      <Search />
     </div>
   );
 }

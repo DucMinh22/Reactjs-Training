@@ -4,6 +4,7 @@ import { Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import axiosService from "../../utils/axiosService";
 import { getInfoProducts, searchProduct } from "../../action/action";
+import { useHistory } from "react-router-dom";
 
 export default function Banner() {
   const dispatch = useDispatch();
@@ -12,9 +13,15 @@ export default function Banner() {
   const search = stateSearch.searchProducts;
   console.log("stateSearch :>> ", stateSearch);
   console.log("search", search);
+  const history = useHistory();
 
   const { Search } = Input;
-
+  const handleNavigateSearch = (search) => {
+    history.push({
+      pathname: `/search`,
+      state: { key: search },
+    });
+  };
   const handleSearch = (value) => {
     console.log("searching.. %o", value);
     axiosService
@@ -23,6 +30,7 @@ export default function Banner() {
       )
       .then((res) => {
         dispatch(searchProduct(res.data));
+        handleNavigateSearch(value);
       })
       .catch((error) => {
         console.log("Error fetching and parsing data", error);

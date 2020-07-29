@@ -16,7 +16,7 @@ export default function ProductItem() {
       (product) => product.categoryId === categoryId
     );
     return data.map((value, key) => (
-      <div className="wrapper-item col" key={key}>
+      <div className="wrapper-item" key={key}>
         <ItemProducts
           id={value.id}
           image={value.image}
