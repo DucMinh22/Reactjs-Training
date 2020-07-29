@@ -24,7 +24,7 @@ const MENU = [
         to: '/cart',
         exact: false,
     },
-]
+];
 
 export default function Header() {
     const history = useHistory();
