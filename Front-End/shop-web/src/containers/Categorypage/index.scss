@@ -35,6 +35,17 @@
     }
 
     .contentWrapper {
+        .optionField {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background-color: $primaryWhite;
+
+            &__item {
+                margin: 0 24px;
+            }
+        }
+
         .mainContent {
             display: grid;
             grid-template-columns: auto auto auto;
@@ -44,6 +55,12 @@
             &__item {
                 padding: 10px;
             }
+        }
+
+        .loadMoreField {
+            background-color: $primaryWhite;
+            display: flex;
+            justify-content: flex-end;
         }
     }
 }

@@ -21,10 +21,11 @@ export const getAllCategories = () => {
   };
 };
 
-export const getProductsByCategory = (categoryId) => {
+export const getProductsByCategory = (categoryId, option) => {
   return {
     type: GET_PRODUCTS_BY_CATEGORY,
     categoryId,
+    option,
   };
 };
 
