@@ -1,8 +1,8 @@
 import React from 'react'
 import {
-    BrowserRouter as Router,
     Link
 } from "react-router-dom";
+import './index.scss'
 
 export default function ItemProducts(props) {
     const { image, title, price, percent, type, id, categoryId } = props
@@ -24,7 +24,7 @@ export default function ItemProducts(props) {
                         <p2>{percent}%</p2>
                     </div>
                     <div className="origin-price">
-                        6.690.000 ₫
+                        $ 6.690
                     </div>
                 </div>
             </a>

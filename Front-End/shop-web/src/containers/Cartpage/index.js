@@ -46,8 +46,8 @@ export default function CartPage() {
                             </Col>
                             <Col span={5}>
                                 <div className="more">
-                                    <Button className="delete">
-                                        <DeleteOutlined  onClick={() =>removeItemProducts(product.id)}/>
+                                    <Button className="delete" onClick={() =>removeItemProducts(product.id)}>
+                                        <DeleteOutlined  />
                                     </Button>
                                 </div>
                             </Col>
@@ -58,7 +58,7 @@ export default function CartPage() {
         ))
     }
 
-    const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price), 0);
+  const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price), 0);
 
   const removeItemProducts = useCallback(
     (productid) => {
