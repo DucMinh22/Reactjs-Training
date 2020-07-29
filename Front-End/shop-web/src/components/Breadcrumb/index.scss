@@ -1,0 +1,12 @@
+@import '../../utils/Color.scss';
+
+.breadCrumbContainer {
+    padding: 0 20px 20px;
+    background-color: $primaryWhite;
+
+    span {
+        a:hover {
+            color: $primaryGreen
+        }
+    }
+}

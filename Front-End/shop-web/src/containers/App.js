@@ -14,7 +14,7 @@ function App() {
       <Route exact path="/" render={() => <Layout component={HomePage} />} />
       <Route path="/category" render={() => <Layout component={CategoryPage} />} />
       <Route path="/cart" render={() => <Layout component={CartPage} />} />
-      <Route path="/ProductsDetail" render={() => <Layout component={Productdetails} />} />
+      <Route path="/ProductsDetail/:id" render={() => <Layout component={Productdetails} />} />
     </Switch>
   );
 }

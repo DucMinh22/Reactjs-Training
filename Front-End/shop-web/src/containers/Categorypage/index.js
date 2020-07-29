@@ -8,6 +8,7 @@ import Loading from '../../components/Loading';
 import { useHistory } from 'react-router-dom';
 import ItemProducts from '../../components/ItemProducts';
 import Button from '../../components/Button';
+import BreadCrumb from '../../components/Breadcrumb';
 
 const { Sider, Content } = Layout;
 
@@ -105,6 +106,13 @@ export default function CategoryPage() {
         })
     }, [option, order, sortBy]);
 
+    const linksBreadCrumb = [
+        {
+            name: 'Home',
+            to: '/'
+        },
+    ]
+
     return (
         <div>
             {loading && <Loading />}
@@ -123,6 +131,7 @@ export default function CategoryPage() {
                     }
                 </Sider>
                 <Layout className="contentWrapper">
+                    <BreadCrumb links={linksBreadCrumb} nameActivePage={'Category'} />
                     <div className="optionField">
                         <div className="optionField__item">
                             <Select style={{ width: 120 }} onChange={handleChangeType} value={sortBy}>

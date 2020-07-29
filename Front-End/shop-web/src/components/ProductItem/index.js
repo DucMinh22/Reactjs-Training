@@ -17,9 +17,8 @@ export default function ProductItem() {
       (product) => product.categoryId === categoryId
     );
     return data.map((value, key) => (
-      <div className="wrapper-item col">
+      <div className="wrapper-item col" key={key}>
         <ItemProducts
-          key={key}
           id={value.id}
           image={value.image}
           title={value.name}
@@ -28,7 +27,7 @@ export default function ProductItem() {
           categoryId={value.categoryId}
           type={"home"}
         ></ItemProducts>
-      </div>
+      </div >
     ));
   };
   const rederLink = (categoryId) => {
