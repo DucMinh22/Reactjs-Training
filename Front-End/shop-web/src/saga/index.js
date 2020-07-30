@@ -1,4 +1,4 @@
-import { all, cancel, fork } from 'redux-saga/effects'
+import { all, fork } from 'redux-saga/effects'
 import productWatcher from './productSaga'
 import categoryWatcher from './categorySaga'
 
