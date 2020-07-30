@@ -12,7 +12,6 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
-  console.log(products);
   // componentDidMount
 
   useEffect(() => {

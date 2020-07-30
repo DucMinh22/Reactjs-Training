@@ -1,38 +1,45 @@
 $color-text: rgb(120, 120, 120);
 $font-text-small: 13px;
-
-.frame {
-  img {
-    width: 250px;
-  }
-
-  .title-product {
-    color: $font-text-small;
-    margin-top: 10px;
-
-    p {
-      margin-bottom: 5px;
+.wrapper-item {
+  .frame {
+    padding: 10px;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(255, 255, 255);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
     }
-  }
-
-  .price {
-    display: flex;
-
-    p {
-      margin-right: 13px;
-      font-weight: bold;
-      margin-bottom: 5px;
+    img {
+      width: 250px;
     }
 
-    p2 {
+    .title-product {
+      color: $font-text-small;
+      margin-top: 10px;
+
+      p {
+        margin-bottom: 5px;
+      }
+    }
+
+    .price {
+      display: flex;
+
+      p {
+        margin-right: 13px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      p2 {
+        color: $color-text;
+        font-size: $font-text-small;
+      }
+    }
+
+    .origin-price {
       color: $color-text;
       font-size: $font-text-small;
+      text-decoration: line-through;
     }
-  }
-
-  .origin-price {
-    color: $color-text;
-    font-size: $font-text-small;
-    text-decoration: line-through;
   }
 }

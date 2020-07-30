@@ -9,13 +9,10 @@ import { useHistory } from "react-router-dom";
 export default function Banner() {
   const dispatch = useDispatch();
   const stateSearch = useSelector((state) => state.products);
-
   const search = stateSearch.searchProducts;
-  console.log("stateSearch :>> ", stateSearch);
-  console.log("search", search);
   const history = useHistory();
-
   const { Search } = Input;
+
   const handleNavigateSearch = (search) => {
     history.push({
       pathname: `/search`,
@@ -51,6 +48,7 @@ export default function Banner() {
           onSearch={handleSearch}
         />
       </div>
+      <div className="background"></div>
     </div>
   );
 }
