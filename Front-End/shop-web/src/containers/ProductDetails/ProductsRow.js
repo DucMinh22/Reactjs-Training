@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Rate, InputNumber, message, Modal } from "antd";
 import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
@@ -12,9 +12,13 @@ export default function ProductRow(props) {
   const cartProduct = {
     ...product,
     quantity,
-    type
+    type,
+    status: 'inCart'
   }
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [product])
 
   const onChange = (value) => {
     setQuantity(value)
@@ -51,6 +55,7 @@ export default function ProductRow(props) {
               min={1}
               max={100}
               defaultValue={1}
+              value={quantity}
               onChange={onChange}
             />
           </div>

@@ -7,6 +7,9 @@ import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
   SEARCH_PRODUCT_ITEM,
+  PAY_ALL_PRODUCTS,
+  PAY_PRODUCT,
+  CONFIRM_PAYMENT,
 } from "./actionTypes";
 
 export const getAllProducts = () => {
@@ -62,3 +65,22 @@ export const searchProduct = (product) => {
     payload: product,
   };
 };
+
+export const purchaseProduct = (product) => {
+  return {
+    type: PAY_PRODUCT,
+    product
+  }
+}
+
+export const purchaseAllProduct = () => {
+  return {
+    type: PAY_ALL_PRODUCTS
+  }
+}
+
+export const confirmPurchase = () => {
+  return {
+    type: CONFIRM_PAYMENT,
+  }
+}

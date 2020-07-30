@@ -1,26 +1,23 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./index.scss";
-import { Row, Col, Button, message } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import { Row, Col, Button, message, Table, Modal } from "antd";
+import { DeleteOutlined, DollarCircleOutlined } from "@ant-design/icons";
 import Button1 from "../../components/Button";
 import Loading from "../../components/Loading";
-import { removeAllCartProducts, removeFromCart } from "../../action/action";
+import { removeAllCartProducts, removeFromCart, purchaseProduct, purchaseAllProduct, confirmPurchase } from "../../action/action";
 import BreadCrumb from "../../components/Breadcrumb";
 import { Link } from "react-router-dom";
+import columns from "./cartTableCols";
+import Cookies from 'js-cookie';
 
 export default function CartPage() {
-  const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const dispatch = useDispatch();
   const cartReducer = useSelector((state) => state.cart);
-  const { cartProducts } = cartReducer;
-  let timer;
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [cartProducts]);
+  const { cartProducts, purchaseProducts, loading } = cartReducer;
+  const name = Cookies.get('name');
 
   // render Item for cart
   const renderItemCart = (arr) => {
@@ -68,7 +65,13 @@ export default function CartPage() {
                     className="delete"
                     onClick={() => removeItemProducts(product.id)}
                   >
-                    <DeleteOutlined />
+                    <DeleteOutlined style={{fontSize: '16px'}}/>
+                  </Button>
+                  <Button
+                    className="delete"
+                    onClick={() => payItemProduct(product)}
+                  >
+                    <DollarCircleOutlined style={{fontSize: '16px'}}/>
                   </Button>
                 </div>
               </Col>
@@ -79,33 +82,44 @@ export default function CartPage() {
     ));
   };
 
-  const total = cartProducts.reduce(
-    (total, currentItem) =>
-      total +
-      Number.parseInt(currentItem.price) *
-        Number.parseInt(currentItem.quantity),
-    0
-  );
+  const total = cartProducts.reduce((total, currentItem) =>total + Number.parseInt(currentItem.price) *Number.parseInt(currentItem.quantity),0);
+  // pay one product
+  const payItemProduct = useCallback((product) => {
+    if(name) {
+      dispatch(purchaseProduct(product));
+    } else {
+      message.error("Please login before purchasing");
+    }
+  }, [cartProducts, dispatch])
 
-  const removeItemProducts = useCallback(
-    (productid) => {
+  // pay all products
+  const handlePurchase = useCallback(() => {
+    if(name) {
+      dispatch(purchaseAllProduct())
+    } else {
+      message.error("Please login before purchasing");
+    }
+  }, [cartProducts, dispatch]);
+
+  // confirm reveice products
+  const handleConfirmPayment = useCallback(() => {
+      dispatch(confirmPurchase());
+      setVisible(false);
+  }, [purchaseProducts, dispatch])
+
+  // remove from cart
+  const removeItemProducts = useCallback((productid) => {
       dispatch(removeFromCart(productid));
-    },
-    [cartProducts, dispatch]
-  );
+    },[cartProducts, dispatch]);
 
+  // remove all from cart
   const removeAllProducts = useCallback(() => {
     dispatch(removeAllCartProducts());
   }, [cartProducts, dispatch]);
 
-  const handlePurchase = useCallback(() => {
-    setLoading(true);
-    timer = setTimeout(() => {
-      dispatch(removeAllCartProducts());
-      setLoading(false);
-      message.success("Purchase Succes !!!");
-    }, 1000);
-  }, [cartProducts, dispatch]);
+  const handleOpenModal = () => {
+    setVisible(prev => !prev);
+  }
 
   const linksBreadCrumb = [
     {
@@ -149,11 +163,32 @@ export default function CartPage() {
                 Total: <span className="total">$ {total}</span>
               </p>
               <Button1 disabled={total === 0} onClick={handlePurchase}>
-                Purchase
+                Purchase All
               </Button1>
             </div>
           </Col>
         </Row>
+      </div>
+      <div className="delivery">
+          <div className="delivery__head">
+            <h3>Delivery</h3>
+            <Button1 disabled={purchaseProducts.length === 0} onClick={handleOpenModal}>
+                  Confirm Purchase
+            </Button1>
+          </div>
+          <Modal
+            title={`Confirm`}
+            visible={visible}
+            okText="Confirm"
+            onOk={handleConfirmPayment}
+            onCancel={handleOpenModal}
+          >
+            <span>Do you want to confirm your payment?</span>
+          </Modal>
+          <Table 
+            columns={columns}
+            dataSource={purchaseProducts.map(item => {return {...item, key: item.id}})}
+          />
       </div>
     </div>
   );
