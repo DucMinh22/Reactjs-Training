@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom'
 import { DeleteOutlined, DollarCircleOutlined } from "@ant-design/icons";
 import { useDispatch } from 'react-redux';
 import { updateCart } from '../../action/action';
+import { useTranslation } from 'react-i18next';
 
 export default function CartItem({ product, onPay, onRemove }) {
     const [changeQuantity, setChangeQuantity] = useState([]);
     const [quantity, setQuantity] = useState(product.quantity);
     const dispatch = useDispatch();
+    const { t } = useTranslation('common');
 
     const openChangeQuantity = () => {
         let newChange;
@@ -58,10 +60,10 @@ export default function CartItem({ product, onPay, onRemove }) {
                     <Row className="info">
                         <Col span={4}>
                             <div className="info__field">
-                                <p>Name: </p>
-                                <p>Category: </p>
-                                <p>Price: </p>
-                                <p>Quantity: </p>
+                                <p>{t(`cartpage.cartItem.name`)}: </p>
+                                <p>{t(`cartpage.cartItem.category`)}: </p>
+                                <p>{t(`cartpage.cartItem.price`)}: </p>
+                                <p>{t(`cartpage.cartItem.quantity`)}: </p>
                             </div>
                         </Col>
                         <Col span={15}>
@@ -98,7 +100,7 @@ export default function CartItem({ product, onPay, onRemove }) {
                                             </div>
                                             : <div className="changefield">
                                                 <p className="quantity__text">{product.quantity || "1"}</p>
-                                                <p className="quantity__btn" onClick={openChangeQuantity}>Change</p>
+                                                <p className="quantity__btn" onClick={openChangeQuantity}>{t(`cartpage.cartItem.change`)}</p>
                                             </div>
                                     }
                                 </div>

@@ -16,7 +16,7 @@ export default function CartPage() {
     const cartReducer = useSelector((state) => state.cart);
     const { cartProducts, purchaseProducts, loading } = cartReducer;
     const name = localStorage.getItem('name');
-    const { t, i18n } = useTranslation('common');
+    const { t } = useTranslation('common');
 
     // render Item for cart
     const renderItemCart = (arr) => {
@@ -124,14 +124,14 @@ export default function CartPage() {
                     </Button1>
                 </div>
                 <Modal
-                    title={t(`cartpage.confirmModal.title`)}
+                    title={t(`cartpage.comfirmModal.title`)}
                     visible={visible}
-                    okText={t(`cartpage.confirmModal.confirm`)}
-                    cancelText={t(`cartpage.confirmModal.cancel`)}
+                    okText={t(`cartpage.comfirmModal.title`)}
+                    cancelText={t(`cartpage.comfirmModal.cancel`)}
                     onOk={handleConfirmPayment}
                     onCancel={handleOpenModal}
                 >
-                    <span>{t(`cartpage.confirmModal.content`)}</span>
+                    <span>{t(`cartpage.comfirmModal.content`)}</span>
                 </Modal>
                 <Table
                     columns={columns}

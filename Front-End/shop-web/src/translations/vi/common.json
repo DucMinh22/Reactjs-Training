@@ -55,10 +55,10 @@
             "change": "Thay Đổi"
         },
         "comfirmModal": {
-            "title": "Comfirm",
-            "content": "Do you want to confirm your payment?",
-            "cancel": "Cancel",
-            "confirm": "Confirm"
+            "title": "Xác nhận",
+            "content": "Bạn muốn xác nhận đã thanh toán?",
+            "cancel": "Hủy bỏ",
+            "confirm": "Xác nhận"
         }
     },
     "signIn": "Đăng Nhập",
