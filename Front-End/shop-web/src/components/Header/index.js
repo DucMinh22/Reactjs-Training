@@ -8,7 +8,6 @@ import { Row, Col, Affix, Badge, Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
 import Login from "./Login";
-import Search from "../../containers/Search";
 import axiosService from "../../utils/axiosService";
 import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
 
@@ -100,9 +99,8 @@ export default function Header() {
                             <div className="menu">
                                 <ul className="menuList">
                                     {MENU?.map((item) => (
-                                        <li key={item.id}>
+                                        <li key={item.id} id={item.name === "Login" ? "login" : ""}>
                                             <NavLink
-                                                id={item.name === "Login" ? "login" : ""}
                                                 exact={item.exact}
                                                 className="menuList__item"
                                                 activeClassName="menuList__item-active "
@@ -139,6 +137,7 @@ export default function Header() {
                                                             title="Login"
                                                             visible={visible}
                                                             onCancel={handleCancel}
+                                                            footer={false}
                                                         >
                                                             <Login onCancel={handleCancel} />
                                                         </Modal>
