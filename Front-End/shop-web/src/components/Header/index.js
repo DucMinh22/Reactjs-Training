@@ -18,25 +18,29 @@ const MENU = [
         name: "home",
         to: "/",
         exact: true,
+        isAdmin: false,
     },
     {
         id: 2,
         name: "category",
         to: "/category",
         exact: false,
+        isAdmin: false,
     },
     {
         id: 3,
-        name: "cart",
-        to: "/cart",
-        exact: false,
-    },
-    {
-        id: 4,
         name: "login",
         to: "#",
         exact: false,
-    }
+        isAdmin: true,
+    },
+    {
+        id: 4,
+        name: "cart",
+        to: "/cart",
+        exact: false,
+        isAdmin: false,
+    },
 ];
 
 export default function Header() {
@@ -45,6 +49,9 @@ export default function Header() {
     const cartReducer = useSelector((state) => state.cart);
     const { cartProducts } = cartReducer;
     const { Search } = Input;
+    const dispatch = useDispatch();
+    const stateSearch = useSelector((state) => state.products);
+    const search = stateSearch.searchProduct;
     const { t, i18n } = useTranslation('common');
 
     const showModal = () => {
@@ -56,9 +63,7 @@ export default function Header() {
     const handleCancel = () => {
         setVisible(false);
     };
-    const dispatch = useDispatch();
-    const stateSearch = useSelector((state) => state.products);
-    const search = stateSearch.searchProduct;
+
 
     const handleNavigateSearch = (search) => {
         history.push({
@@ -106,7 +111,17 @@ export default function Header() {
                             <div className="menu">
                                 <ul className="menuList">
                                     {MENU?.map((item) => (
-                                        <li key={item.id} id={item.name === "login" ? "login" : ""}>
+                                        <li
+                                            key={item.id}
+                                            id={item.name === "login" ? "login" : ""}
+                                            style={
+                                                localStorage.getItem("name") === "admin"
+                                                    ? item.isAdmin
+                                                        ? { display: "block" }
+                                                        : { display: "none" }
+                                                    : { display: "block" }
+                                            }
+                                        >
                                             <NavLink
                                                 exact={item.exact}
                                                 className="menuList__item"
@@ -124,7 +139,6 @@ export default function Header() {
                                                         <div className="">
                                                             <div
                                                                 className="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa"
-                                                                style={localStorage.getItem('i18nextLng') === 'vi' ? { top: '70px' } : { top: '50px' }}
                                                             >
                                                                 {localStorage.getItem("name") ? (
                                                                     <button
