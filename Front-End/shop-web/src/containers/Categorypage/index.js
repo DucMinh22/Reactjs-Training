@@ -9,6 +9,7 @@ import { useHistory } from 'react-router-dom';
 import ItemProducts from '../../components/ItemProducts';
 import Button from '../../components/Button';
 import BreadCrumb from '../../components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 const { Sider, Content } = Layout;
 
@@ -21,6 +22,7 @@ export default function CategoryPage() {
         categories,
         products,
     } = categoriesState;
+    const { t } = useTranslation('common');
     const [chosenCategory, setChosenCategory] = useState(() => {
         const categoryName = history.location.state?.chosen;
         return categoryName || 1;
@@ -118,13 +120,13 @@ export default function CategoryPage() {
             {loading && <Loading />}
             <Layout className="category">
                 <Sider className="menu">
-                    <p className="menu__title">Categories</p>
+                    <p className="menu__title">{t(`categorypage.title`)}</p>
                     {
                         categories.map(item => {
                             return (
                                 <div className={`${chosenCategory === Number.parseInt(item.id) ? 'menu__item-active' : 'menu__item'}`} key={item.id} onClick={() => handleChooseCategory(Number.parseInt(item.id))}>
                                     <EuroCircleOutlined style={{ fontSize: '20px', marginRight: '10px' }} />
-                                    <span>{item.name}</span>
+                                    <span>{t(`categories.${item.name}`)}</span>
                                 </div>
                             )
                         })
@@ -135,23 +137,23 @@ export default function CategoryPage() {
                     <div className="optionField">
                         <div className="optionField__item">
                             <Select style={{ width: 120 }} onChange={handleChangeType} value={sortBy}>
-                                <Select.Option value="price">Price</Select.Option>
-                                <Select.Option value="createdAt">Create Date</Select.Option>
+                                <Select.Option value="price">{t(`categorypage.price`)}</Select.Option>
+                                <Select.Option value="createdAt">{t(`categorypage.createAt`)}</Select.Option>
                             </Select>
                         </div>
                         <div className="optionField__item">
                             <Select style={{ width: 120 }} onChange={handleChangeOrder} value={order}>
-                                <Select.Option value="asc">Increment</Select.Option>
-                                <Select.Option value="desc">Decrement</Select.Option>
+                                <Select.Option value="asc">{t(`categorypage.increment`)}</Select.Option>
+                                <Select.Option value="desc">{t(`categorypage.decrement`)}</Select.Option>
                             </Select>
                         </div>
-                        <Button onClick={handleSearch}>Search</Button>
+                        <Button onClick={handleSearch}>{t(`search`)}</Button>
                     </div>
                     <Content className="mainContent">
                         {renderProducts(products)}
                     </Content>
                     <div className="loadMoreField">
-                        <Button onClick={handleLoadMore} disabled={sortBy && order}>More</Button>
+                        <Button onClick={handleLoadMore} disabled={sortBy && order}>{t(`categorypage.more`)}</Button>
                     </div>
                 </Layout>
             </Layout>

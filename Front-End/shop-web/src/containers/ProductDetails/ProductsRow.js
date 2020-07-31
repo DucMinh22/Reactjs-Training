@@ -3,12 +3,15 @@ import { Rate, InputNumber, message, Modal } from "antd";
 import Button from "../../components/Button";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../action/action";
+import { useTranslation } from "react-i18next";
 
 export default function ProductRow(props) {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(1);
   const [visible, setVisible] = useState(false);
   const { description, product, type } = props;
+  const { t } = useTranslation('common');
+
   const cartProduct = {
     ...product,
     quantity,
@@ -36,7 +39,7 @@ export default function ProductRow(props) {
         footer={null}
         closable={false}
       >
-        <img className="img-fluid" src={product.image} alt="product_img" />
+        <img className="img-fluid" src={product.image} alt="product_img" style={{ cursor: 'pointer' }} />
       </Modal>
       <div className="row">
         <div className="col-lg-6 col-md-6 images">
@@ -66,8 +69,8 @@ export default function ProductRow(props) {
                 dispatch(addToCart(cartProduct));
               }}
             >
-              ADD TO CARD
-              </Button>
+              {t(`detailpage.addToCart`)}
+            </Button>
           </div>
         </div>
       </div>

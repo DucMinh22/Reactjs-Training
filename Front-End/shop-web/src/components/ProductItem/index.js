@@ -5,9 +5,11 @@ import { Link } from "react-router-dom";
 import "./index.scss";
 import { useSelector } from "react-redux";
 import ItemProducts from "../ItemProducts/index";
+import { useTranslation } from "react-i18next";
 
 export default function ProductItem() {
   const stateProducts = useSelector((state) => state.products);
+  const { t } = useTranslation('common');
   const { products } = stateProducts;
   const renderData = (categoryId) => {
     const data = products.filter(
@@ -43,7 +45,7 @@ export default function ProductItem() {
               border: "1px solid #7fad39",
             }}
           >
-            View more <DoubleRightOutlined />
+            {t(`homepage.viewMore`)} <DoubleRightOutlined />
           </Button>
         </Link>
 
@@ -57,11 +59,11 @@ export default function ProductItem() {
     <div>
       <div className="container">
         <div className="category">
-          <h4>Computers</h4>
+          <h4>{t(`homepage.computer`)}</h4>
           {rederLink(1)}
         </div>
         <div className="category">
-          <h4>Clothing</h4>
+          <h4>{t(`homepage.clothing`)}</h4>
           {rederLink(2)}
         </div>
       </div>

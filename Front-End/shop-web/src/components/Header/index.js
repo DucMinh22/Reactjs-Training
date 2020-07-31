@@ -4,39 +4,39 @@ import LOGO from "../../assets/images/logo1.png";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import "./index.scss";
 import { searchProduct } from "../../action/action";
-import { Row, Col, Affix, Badge, Input } from "antd";
+import { Row, Col, Affix, Badge, Input, Select } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
 import Login from "./Login";
-import Search from "../../containers/Search";
 import axiosService from "../../utils/axiosService";
 import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
+import { useTranslation } from "react-i18next";
 
 const MENU = [
     {
         id: 1,
-        name: "Home",
+        name: "home",
         to: "/",
         exact: true,
     },
     {
         id: 2,
-        name: "Category",
+        name: "category",
         to: "/category",
         exact: false,
     },
     {
         id: 3,
-        name: "Login",
-        to: "#",
+        name: "cart",
+        to: "/cart",
         exact: false,
     },
     {
         id: 4,
-        name: "Cart",
-        to: "/cart",
+        name: "login",
+        to: "#",
         exact: false,
-    },
+    }
 ];
 
 export default function Header() {
@@ -45,6 +45,7 @@ export default function Header() {
     const cartReducer = useSelector((state) => state.cart);
     const { cartProducts } = cartReducer;
     const { Search } = Input;
+    const { t, i18n } = useTranslation('common');
 
     const showModal = () => {
         setVisible(true);
@@ -76,6 +77,10 @@ export default function Header() {
                 console.log("Error fetching and parsing data", error);
             });
     };
+
+    const handleSelectLang = (value) => {
+        i18n.changeLanguage(value);
+    }
     return (
         <Affix>
             <Row className="header" align='middle'>
@@ -86,51 +91,54 @@ export default function Header() {
                         </a>
                     </div>
                 </Col>
+
                 <Col span={19}>
                     <Row align="middle">
-                        <Col span={12}>
+                        <Col span={9}>
                             <Search
-                                placeholder="input search text"
-                                enterButton="Search"
+                                placeholder={t(`searchPlaceholder`)}
+                                enterButton={t(`search`)}
                                 size="large"
                                 onSearch={handleSearch}
                             />
                         </Col>
-                        <Col span={12}>
+                        <Col span={15}>
                             <div className="menu">
                                 <ul className="menuList">
                                     {MENU?.map((item) => (
-                                        <li key={item.id}>
+                                        <li key={item.id} id={item.name === "login" ? "login" : ""}>
                                             <NavLink
-                                                id={item.name === "Login" ? "login" : ""}
                                                 exact={item.exact}
                                                 className="menuList__item"
                                                 activeClassName="menuList__item-active "
                                                 to={item.to}
                                             >
-                                                {item.name === "Login" && localStorage.getItem("name")
+                                                {item.name === "login" && localStorage.getItem("name")
                                                     ? localStorage.getItem("name")
-                                                    : item.name}
-                                                {item.name === "Login" && (
+                                                    : t(`menu.${item.name}`)}
+                                                {item.name === "login" && (
                                                     <div className="itemIcon Login">
                                                         <UserOutlined
                                                             style={{ fontSize: "20px", marginLeft: "10px" }}
                                                         />
                                                         <div className="">
-                                                            <div class="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa">
+                                                            <div
+                                                                className="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa"
+                                                                style={localStorage.getItem('i18nextLng') === 'vi' ? { top: '70px' } : { top: '50px' }}
+                                                            >
                                                                 {localStorage.getItem("name") ? (
                                                                     <button
                                                                         onClick={handleSignOut}
                                                                         class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
-                                                                    > Sign out </button>
+                                                                    > {t(`signOut`)} </button>
                                                                 ) : (
                                                                         <>
                                                                             <button
                                                                                 onClick={showModal}
-                                                                                class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
-                                                                            >Sign in</button>
+                                                                                className="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
+                                                                            >{t(`signIn`)}</button>
                                                                             <button className="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI">
-                                                                                Sign up </button>
+                                                                                {t(`signUp`)} </button>
                                                                         </>
                                                                     )}
                                                             </div>
@@ -139,13 +147,14 @@ export default function Header() {
                                                             title="Login"
                                                             visible={visible}
                                                             onCancel={handleCancel}
+                                                            footer={false}
                                                         >
                                                             <Login onCancel={handleCancel} />
                                                         </Modal>
                                                     </div>
                                                 )}
-                                                {item.name === "Cart" && (
-                                                    <div classNameName="itemIcon">
+                                                {item.name === "cart" && (
+                                                    <div className="itemIcon">
                                                         <Badge
                                                             count={cartProducts.length}
                                                             style={{ backgroundColor: "#7fad39" }}
@@ -164,6 +173,12 @@ export default function Header() {
                                             ></div>
                                         </li>
                                     ))}
+                                    <li>
+                                        <Select onChange={handleSelectLang} defaultValue={localStorage.getItem('i18nextLng')}>
+                                            <Select.Option value="vi">VI</Select.Option>
+                                            <Select.Option value="en">EN</Select.Option>
+                                        </Select>
+                                    </li>
                                 </ul>
                             </div>
                         </Col>

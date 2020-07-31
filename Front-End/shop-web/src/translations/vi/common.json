@@ -1,0 +1,81 @@
+{
+    "homepage": {
+        "computer": "Máy Tính",
+        "viewMore": "Xem thêm",
+        "clothing": "Quần Áo"
+    },
+    "categorypage": {
+        "title": "Loại",
+        "price": "Giá",
+        "createAt": "Ngày tạo",
+        "increment": "Tăng",
+        "decrement": "Giảm",
+        "more": "Thêm"
+    },
+    "search": "Tìm Kiếm",
+    "searchPlaceholder": "Nhập từ khóa tìm kiếm",
+    "categories": {
+        "Computers": "Máy Tính",
+        "Clothing": "Quần Áo",
+        "Books": "Sách",
+        "Grocery": "Tạp hóa",
+        "Shoes": "Giày",
+        "Automotive": "Tự động",
+        "Music": "Âm nhạc",
+        "Kids": "Trẻ em",
+        "Tools": "Vật dụng",
+        "Health": "Sức khỏe",
+        "Sports": "Thể thao",
+        "Electronics": "Điện Gia Dụng",
+        "Games": "Trò chơi",
+        "Garden": "Làm vườn"
+    },
+    "cartpage": {
+        "yourCart": "Giỏ hàng",
+        "removeAll": "Xóa Tất Sản Phẩm",
+        "totalProducts": "Tổng số sản phầm trong giỏ hàng của bạn",
+        "noProducts": "Bạn không có sản phẩm nào trong giỏ hàng",
+        "payment": "Thanh Toán",
+        "total": "Tổng",
+        "purchaseAll": "Thanh Toán Tất",
+        "delivery": "Vận Chuyển",
+        "confirmPurchase": "Xác Nhận Giao Dịch",
+        "table": {
+            "number": "STT",
+            "productName": "Tên Sản Phẩm",
+            "productCategory": "Loại Sản Phẩm",
+            "quantity": "Số Lượng",
+            "status": "Trạng Thái"
+        },
+        "cartItem": {
+            "name": "Tên",
+            "category": "Loại",
+            "price": "Giá",
+            "quantity": "Số Lượng",
+            "change": "Thay Đổi"
+        },
+        "comfirmModal": {
+            "title": "Comfirm",
+            "content": "Do you want to confirm your payment?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        }
+    },
+    "signIn": "Đăng Nhập",
+    "signUp": "Đăng Ký",
+    "signOut": "Đăng Xuất",
+    "detailpage": {
+        "addToCart": "Thêm Vào Giỏ Hàng",
+        "relatedProducts": "Sản Phẩm Liên Quan"
+    },
+    "menu": {
+        "home": "Trang Chủ",
+        "category": "Phân Loại",
+        "cart": "Giỏ Hàng",
+        "login": "Đăng Nhập"
+    },
+    "searchpage": {
+        "key": "Kết quả tìm kiếm",
+        "products": "Sản phẩm"
+    }
+}
