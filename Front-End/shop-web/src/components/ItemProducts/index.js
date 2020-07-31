@@ -25,7 +25,7 @@ export default function ItemProducts(props) {
             <p>$ {price}</p>
             <p>{percent}%</p>
           </div>
-          <div className="origin-price">$ 6.690</div>
+          <div className="origin-price"> 6.690</div>
         </div>
       </div>
     </div>
