@@ -7,7 +7,6 @@ import Loading from "../../components/Loading";
 import { removeAllCartProducts, removeFromCart, purchaseProduct, purchaseAllProduct, confirmPurchase } from "../../action/action";
 import BreadCrumb from "../../components/Breadcrumb";
 import columns from "./cartTableCols";
-import Cookies from 'js-cookie';
 import CartItem from "./CartItem";
 
 export default function CartPage() {
@@ -15,7 +14,7 @@ export default function CartPage() {
     const dispatch = useDispatch();
     const cartReducer = useSelector((state) => state.cart);
     const { cartProducts, purchaseProducts, loading } = cartReducer;
-    const name = Cookies.get('name');
+    const name = localStorage.getItem('name');
 
     // render Item for cart
     const renderItemCart = (arr) => {

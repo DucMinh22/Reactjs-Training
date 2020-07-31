@@ -10,7 +10,7 @@
   .menu {
     .menuList {
       display: flex;
-      justify-content: space-between;
+      justify-content: flex-end;
       align-items: center;
       list-style: none;
       margin-bottom: 0;
@@ -26,63 +26,73 @@
 
       li {
         cursor: pointer;
-        #login {
-          .cVRwHa {
-            display: none;
-            width: auto;
-            min-width: 196px;
-            z-index: 15;
-            box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
-            position: absolute;
-            top: 33px;
-            left: calc(50% + 10px);
-            transform: translateX(-50%);
-            border-width: 1px;
-            border-style: solid;
-            border-color: rgb(239, 239, 239);
-            border-image: initial;
-            background: rgb(255, 255, 255);
-            list-style: none;
-            margin: 0px;
-            padding: 10px 0px;
-            border-radius: 0px 0px 3px 3px;
-            .dYkBsI {
-              color: rgb(74, 74, 74);
-              display: inline-block;
-              font-weight: 400;
-              text-align: center;
-              vertical-align: middle;
-              touch-action: manipulation;
-              cursor: pointer;
-              white-space: nowrap;
-              font-size: 14px;
-              user-select: none;
-              width: 236px;
-              height: 41px;
-              line-height: 41px;
-              text-shadow: rgb(171, 171, 171) 0px 0px 1px;
-              background: rgb(253, 216, 53);
-              border-width: 0px;
-              border-style: initial;
-              border-color: initial;
-              border-image: initial;
-              padding: 0px;
-              border-radius: 4px;
-              margin: 5px 12px;
-              outline: none;
-            }
-          }
-          &:hover .cVRwHa {
-            display: block;
+        margin: 0 24px;
+
+        &:hover {
+          .hr {
+            width: 100%;
+            height: 1px;
+            border: 2px solid $primaryGreen;
           }
         }
       }
 
-      li:hover {
-        .hr {
-          width: 100%;
-          height: 1px;
-          border: 2px solid $primaryGreen;
+      #login {
+        position: relative;
+
+        .cVRwHa {
+          display: block;
+          z-index: -1 !important;
+          opacity: 0;
+          width: fit-content;
+          z-index: 15;
+          box-shadow: rgba(0, 0, 0, 0.18) 0px 6px 12px 0px;
+          position: absolute;
+          top: 50px;
+          left: calc(50% + 10px);
+          transform: translateX(-50%);
+          border-width: 1px;
+          border-style: solid;
+          border-color: rgb(239, 239, 239);
+          border-image: initial;
+          background: rgb(255, 255, 255);
+          list-style: none;
+          margin: 0px;
+          padding: 10px 0px;
+          border-radius: 0px 0px 3px 3px;
+
+          .dYkBsI {
+            color: rgb(74, 74, 74);
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 14px;
+            user-select: none;
+            width: 236px;
+            height: 41px;
+            line-height: 41px;
+            text-shadow: rgb(171, 171, 171) 0px 0px 1px;
+            background: rgb(253, 216, 53);
+            border-width: 0px;
+            border-style: initial;
+            border-color: initial;
+            border-image: initial;
+            padding: 0px;
+            border-radius: 4px;
+            margin: 5px 12px;
+            outline: none;
+          }
+        }
+
+        &:hover {
+          .cVRwHa {
+            opacity: 1;
+            z-index: 99 !important;
+          }
         }
       }
     }
@@ -101,7 +111,4 @@
   width: 100%;
   height: 1px;
   border: 2px solid $primaryGreen;
-}
-.ant-modal-footer {
-  display: none !important;
 }

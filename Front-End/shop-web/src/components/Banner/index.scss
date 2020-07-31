@@ -1,33 +1,40 @@
 .img-banner {
   align-items: center;
+  position: relative;
+
   img {
-    width: 1120px;
+    width: 100%;
   }
+
   .ant-input-group-wrapper {
     width: 558px;
-    right: 666px;
-    top: 234px;
     position: absolute;
+    top: 40%;
+    left: 25%;
     z-index: 2;
-    .ant-input-group > .ant-input:first-child,
+
+    .ant-input-group>.ant-input:first-child,
     .ant-input-group-addon:first-child {
       height: 55px;
     }
+
     .ant-btn-primary {
       background-color: #7fad39;
       border: none;
     }
+
     .ant-btn-lg {
       height: 55px !important;
       padding: 6.4px 30px !important;
     }
   }
-}
-.background {
-  background-color: #00000042;
-  position: absolute;
-  z-index: 1;
-  height: 336px;
-  width: 59%;
-  bottom: 501px;
+
+  .background {
+    background-color: #00000042;
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+  }
 }
