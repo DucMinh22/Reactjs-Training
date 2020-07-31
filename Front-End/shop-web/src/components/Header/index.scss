@@ -22,10 +22,11 @@
         padding: 12px 12px 0;
         color: $primaryGreen;
         font-weight: 700;
+      }
 
-        .itemIcon {
-          display: flex;
-          align-items: center;
+      li {
+        cursor: pointer;
+        #login {
           .cVRwHa {
             display: none;
             width: auto;
@@ -71,16 +72,10 @@
               outline: none;
             }
           }
-        }
-        .Login {
           &:hover .cVRwHa {
             display: block;
           }
         }
-      }
-
-      li {
-        cursor: pointer;
       }
 
       li:hover {

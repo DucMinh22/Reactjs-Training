@@ -47,7 +47,9 @@ export default function Header() {
   const handleOk = () => {
     setVisible(false);
   };
-
+  const handleSignOut = () => {
+    localStorage.removeItem("name");
+  };
   const handleCancel = () => {
     setVisible(false);
   };
@@ -73,14 +75,25 @@ export default function Header() {
               {MENU?.map((item) => (
                 <li key={item.id}>
                   <NavLink
+                    id={item.name === "Login" ? "login" : ""}
                     exact={item.exact}
                     className="menuList__item"
-                    activeClassName="menuList__item-active"
+                    activeClassName="menuList__item-active "
                     to={item.to}
                   >
                     {item.name === "Login" && localStorage.getItem("name")
                       ? localStorage.getItem("name")
                       : item.name}
+                    {/* 
+                    {item.name !== "Login" && (
+                      <div className="sucsessLogin">
+                        <div class="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa">
+                          <button class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI">
+                            Sign out
+                          </button>
+                        </div>
+                      </div>
+                    )} */}
                     {/* {localStorage.length > 0 && localStorage.removeItem("name")} */}
                     {/* {className === "cVRwHa" && className === "Logout"
                       ? localStorage.getItem("name")
@@ -90,17 +103,28 @@ export default function Header() {
                         <UserOutlined
                           style={{ fontSize: "20px", marginLeft: "10px" }}
                         />
-                        <div className>
+                        <div className="">
                           <div class="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa">
-                            <button
-                              onClick={showModal}
-                              class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
-                            >
-                              Sign in
-                            </button>
-                            <button className="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI">
-                              Sign up
-                            </button>
+                            {localStorage.getItem("name") ? (
+                              <button
+                                onClick={handleSignOut}
+                                class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
+                              >
+                                Sign out
+                              </button>
+                            ) : (
+                              <>
+                                <button
+                                  onClick={showModal}
+                                  class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI"
+                                >
+                                  Sign in
+                                </button>
+                                <button className="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI">
+                                  Sign up
+                                </button>
+                              </>
+                            )}
                           </div>
                         </div>
                         <Modal
