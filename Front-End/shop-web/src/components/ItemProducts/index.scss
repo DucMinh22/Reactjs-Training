@@ -46,22 +46,14 @@ $font-text-small: 13px;
         }
       }
 
-      <<<<<<< HEAD p {
-        =======.origin-price {
-          >>>>>>>origin/nmduc color: $color-text;
+      p {
+        .origin-price {
+          color: $color-text;
           font-size: $font-text-small;
           text-decoration: line-through;
         }
       }
-
-      <<<<<<< HEAD .origin-price {
-        color: $color-text;
-        font-size: $font-text-small;
-        text-decoration: line-through;
-      }
     }
 
-    =======
   }
-
-  >>>>>>>origin/nmduc
+}

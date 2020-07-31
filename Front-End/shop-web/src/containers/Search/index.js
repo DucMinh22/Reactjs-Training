@@ -7,10 +7,6 @@ export default function Search() {
   const stateSearch = useSelector((state) => state.products);
   const search = stateSearch.searchProducts;
   const history = useHistory();
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/nmduc
   const dataSearch = search.map((item, key) => (
     <div className="wrapper-item">
       <ItemProducts
