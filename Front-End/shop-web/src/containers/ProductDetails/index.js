@@ -8,6 +8,7 @@ import Loading from "../../components/Loading";
 import BreadCrumb from "../../components/Breadcrumb";
 import { useSelector } from "react-redux";
 import ItemProducts from "../../components/ItemProducts";
+import { useTranslation } from "react-i18next";
 
 export default function Productdetails() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function Productdetails() {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const productReducer = useSelector((state) => state.products);
   const { products } = productReducer;
+  const { t } = useTranslation('common');
 
   useEffect(() => {
     setLoading(true);
@@ -67,7 +69,7 @@ export default function Productdetails() {
           product={product}
           description="   Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Proin eget tortor risus."
         />
-        <h4 style={{ marginTop: "30px" }}>Related Products</h4>
+        <h4 style={{ marginTop: "30px" }}>{t(`detailpage.relatedProducts`)}</h4>
         <div className="relatedField">
           {relatedProducts.map((item) => {
             return (

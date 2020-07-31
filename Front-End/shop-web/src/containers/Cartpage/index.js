@@ -8,6 +8,7 @@ import { removeAllCartProducts, removeFromCart, purchaseProduct, purchaseAllProd
 import BreadCrumb from "../../components/Breadcrumb";
 import columns from "./cartTableCols";
 import CartItem from "./CartItem";
+import { useTranslation } from "react-i18next";
 
 export default function CartPage() {
     const [visible, setVisible] = useState(false);
@@ -15,6 +16,7 @@ export default function CartPage() {
     const cartReducer = useSelector((state) => state.cart);
     const { cartProducts, purchaseProducts, loading } = cartReducer;
     const name = localStorage.getItem('name');
+    const { t } = useTranslation('common');
 
     // render Item for cart
     const renderItemCart = (arr) => {
@@ -78,37 +80,37 @@ export default function CartPage() {
             {loading && <Loading />}
             <BreadCrumb links={linksBreadCrumb} nameActivePage={"Cart"} />
             <p style={{ fontWeight: "700" }}>
-                Total products in your cart: {cartProducts.length}
+                {t(`cartpage.totalProducts`)}: {cartProducts.length}
             </p>
             <hr></hr>
             <div className="title">
-                <h3>Your Cart</h3>
+                <h3>{t(`cartpage.yourCart`)}</h3>
                 <Button1
                     disabled={cartProducts?.length === 0}
                     onClick={removeAllProducts}
                 >
-                    Remove All
-        </Button1>
+                    {t(`cartpage.removeAll`)}
+                </Button1>
             </div>
             <div className="cartList">
                 {cartProducts?.length > 0 ?
                     renderItemCart(cartProducts)
                     :
-                    <p>You don't have any products in your cart</p>
+                    <p>{t(`cartpage.noProducts`)}</p>
                 }
             </div>
             <div className="payment">
                 <Row>
                     <Col span={12}>
-                        <h3>Payment</h3>
+                        <h3>{t(`cartpage.payment`)}</h3>
                     </Col>
                     <Col span={12}>
                         <div className="payment__content">
                             <p>
-                                Total: <span className="total">$ {total}</span>
+                                {t(`cartpage.total`)}: <span className="total">$ {total}</span>
                             </p>
                             <Button1 disabled={total === 0} onClick={handlePurchase}>
-                                Purchase All
+                                {t(`cartpage.purchaseAll`)}
                             </Button1>
                         </div>
                     </Col>
@@ -116,19 +118,20 @@ export default function CartPage() {
             </div>
             <div className="delivery">
                 <div className="delivery__head">
-                    <h3>Delivery</h3>
+                    <h3>{t(`cartpage.delivery`)}</h3>
                     <Button1 disabled={purchaseProducts.length === 0} onClick={handleOpenModal}>
-                        Confirm Purchase
+                        {t(`cartpage.confirmPurchase`)}
                     </Button1>
                 </div>
                 <Modal
-                    title={`Confirm`}
+                    title={t(`cartpage.comfirmModal.title`)}
                     visible={visible}
-                    okText="Confirm"
+                    okText={t(`cartpage.comfirmModal.title`)}
+                    cancelText={t(`cartpage.comfirmModal.cancel`)}
                     onOk={handleConfirmPayment}
                     onCancel={handleOpenModal}
                 >
-                    <span>Do you want to confirm your payment?</span>
+                    <span>{t(`cartpage.comfirmModal.content`)}</span>
                 </Modal>
                 <Table
                     columns={columns}

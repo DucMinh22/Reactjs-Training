@@ -5,7 +5,7 @@ import CategoryPage from "./Categorypage";
 import HomePage from "./Homepage";
 import CartPage from "./Cartpage";
 import Productdetails from "./ProductDetails";
-
+import AdminHompage from "./Admin";
 import "antd/dist/antd.css";
 import Search from "./Search";
 
@@ -19,6 +19,7 @@ function App() {
       />
       <Route path="/cart" render={() => <Layout component={CartPage} />} />
       <Route path="/search" render={() => <Layout component={Search} />} />
+      <Route path="/admin" render={() => <Layout component={AdminHompage} />} />
       <Route
         path="/ProductsDetail/:id"
         render={() => <Layout component={Productdetails} />}

@@ -1,0 +1,81 @@
+{
+    "homepage": {
+        "computer": "Computer",
+        "viewMore": "View More",
+        "clothing": "Clothing"
+    },
+    "categorypage": {
+        "title": "category",
+        "price": "Price",
+        "createAt": "Create Date",
+        "increment": "Increment",
+        "decrement": "Decrement",
+        "more": "More"
+    },
+    "search": "Search",
+    "searchPlaceholder": "Input search text",
+    "categories": {
+        "Computers": "Computers",
+        "Clothing": "Clothing",
+        "Books": "Books",
+        "Grocery": "Grocery",
+        "Shoes": "Shoes",
+        "Automotive": "Automotive",
+        "Music": "Music",
+        "Kids": "Kids",
+        "Tools": "Tools",
+        "Health": "Health",
+        "Sports": "Sports",
+        "Electronics": "Electronics",
+        "Games": "Games",
+        "Garden": "Garden"
+    },
+    "cartpage": {
+        "yourCart": "Your Cart",
+        "removeAll": "Remove All",
+        "totalProducts": "Total products in your cart",
+        "noProducts": "You don't have any products in your cart",
+        "payment": "Payment",
+        "total": "Total",
+        "purchaseAll": "Purchase All",
+        "delivery": "Delivery",
+        "confirmPurchase": "Confirm Purchase",
+        "table": {
+            "number": "Number",
+            "productName": "Product Name",
+            "productCategory": "Product Category",
+            "quantity": "Quantity",
+            "status": "Status"
+        },
+        "cartItem": {
+            "name": "Name",
+            "category": "Category",
+            "price": "Price",
+            "quantity": "Quantity",
+            "change": "Change"
+        },
+        "comfirmModal": {
+            "title": "Comfirm",
+            "content": "Do you want to confirm your payment?",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        }
+    },
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "signOut": "Sign Out",
+    "detailpage": {
+        "addToCart": "Add To Cart",
+        "relatedProducts": "Related Products"
+    },
+    "menu": {
+        "home": "Home",
+        "category": "Category",
+        "cart": "Cart",
+        "login": "Login"
+    },
+    "searchpage": {
+        "key": "Searching result",
+        "products": "Products"
+    }
+}
