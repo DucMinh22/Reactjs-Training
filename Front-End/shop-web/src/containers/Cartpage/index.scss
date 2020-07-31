@@ -25,16 +25,38 @@
 
                     .name,
                     .category,
-                    .price {
+                    .price,
+                    .quantity__text {
                         font-weight: 600;
+                    }
+
+                    .quantity {
+                        .changefield {
+                            display: flex;
+                            align-items: center;
+
+                            .quantity__text {
+                                margin-right: 50px;
+                            }
+
+                            .quantity__btn {
+                                margin-left: 20px;
+                                cursor: pointer;
+                                color: #1890ff;
+                            }
+                        }
                     }
                 }
 
                 .more {
                     display: flex;
-                    flex-direction: column;
+                    justify-content: flex-end;
                     align-items: flex-end;
                     z-index: 3;
+
+                    button {
+                        margin: 0 10px;
+                    }
                 }
             }
 
@@ -56,6 +78,17 @@
             .total {
                 font-weight: 900;
             }
+        }
+    }
+
+    .delivery {
+        margin-top: 50px;
+
+        &__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
         }
     }
 }

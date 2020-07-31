@@ -1,17 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ItemProducts from "../../components/ItemProducts";
 import "./index.scss";
-import { useDispatch, useSelector } from "react-redux";
-import axiosService from "../../utils/axiosService";
-import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
-import { getInfoProducts, searchProduct } from "../../action/action";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 export default function Search() {
-  const dispatch = useDispatch();
   const stateSearch = useSelector((state) => state.products);
   const search = stateSearch.searchProducts;
   const history = useHistory();
-
   const dataSearch = search.map((item, key) => (
     <div className="wrapper-item">
       <ItemProducts

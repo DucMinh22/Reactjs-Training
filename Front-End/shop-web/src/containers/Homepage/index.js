@@ -13,7 +13,6 @@ export default function HomePage() {
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
   // componentDidMount
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await axiosService.get(`${ENDPOINT}${GET_PRODUCTS_API}`);
