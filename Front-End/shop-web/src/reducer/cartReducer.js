@@ -10,7 +10,8 @@ import {
     PAY_ALL_PRODUCTS_SUCCESS,
     PAY_ALL_PRODUCTS_FAILURE,
     CONFIRM_PAYMENT_FAILURE,
-    CONFIRM_PAYMENT_SUCCESS
+    CONFIRM_PAYMENT_SUCCESS,
+    UPDATE_CART_PRODUCT
 } from "../action/actionTypes";
 import Cookies from 'js-cookie';
 
@@ -51,6 +52,16 @@ const cartReducer = (state = initialState, action) => {
             return {
                 ...state,
                 cartProducts: cart
+            }
+        case UPDATE_CART_PRODUCT:
+            const arrCartProductIds = state.cartProducts.map(item => item.id);
+            const idx = arrCartProductIds.indexOf(action.product.id);
+            let updateCart = [...state.cartProducts]
+            updateCart[idx] = action.product;
+            localStorage.setItem('cart', JSON.stringify(updateCart));
+            return {
+                ...state,
+                cartProducts: updateCart
             }
         case PAY_PRODUCT:
             return {

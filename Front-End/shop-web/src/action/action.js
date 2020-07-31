@@ -10,6 +10,7 @@ import {
   PAY_ALL_PRODUCTS,
   PAY_PRODUCT,
   CONFIRM_PAYMENT,
+  UPDATE_CART_PRODUCT,
 } from "./actionTypes";
 
 export const getAllProducts = () => {
@@ -82,5 +83,13 @@ export const purchaseAllProduct = () => {
 export const confirmPurchase = () => {
   return {
     type: CONFIRM_PAYMENT,
+  }
+}
+
+export const updateCart = (product) => {
+  console.log('product', product)
+  return {
+    type: UPDATE_CART_PRODUCT,
+    product
   }
 }

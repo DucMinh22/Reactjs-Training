@@ -80,7 +80,7 @@ function* confirmPayment() {
     try {
         let res = yield call(() => axiosService.put(`${ENDPOINT}${GET_BILL_API}/${billId}`, body))
         if (res.status === 201 || res.status === 200) {
-            Cookies.set('billId', res.data.id, { expires: 1 });
+            Cookies.remove('billId');
             yield put({ type: CONFIRM_PAYMENT_SUCCESS });
         } else {
             yield put({ type: CONFIRM_PAYMENT_FAILURE, payload: 'Create Failed' });

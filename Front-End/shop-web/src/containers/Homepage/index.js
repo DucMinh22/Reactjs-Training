@@ -12,9 +12,7 @@ export default function HomePage() {
   const dispatch = useDispatch();
   const stateProducts = useSelector((state) => state.products);
   const { products } = stateProducts;
-  console.log(products);
   // componentDidMount
-
   useEffect(() => {
     const fetchData = async () => {
       const res = await axiosService.get(`${ENDPOINT}${GET_PRODUCTS_API}`);

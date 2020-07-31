@@ -35,15 +35,17 @@ export default function Productdetails() {
         setLoading(false);
       }
     };
-
-    const productsByCategory = products.filter(
-      (item) => item.categoryId === Number.parseInt(categoryId)
-    );
-    const related = productsByCategory.splice(0, 5);
-
-    setRelatedProducts(related);
     fetchData();
-  }, [id, categoryId]);
+  }, [id, categoryId, products, type]);
+
+  useEffect(() => {
+    const productsByCategory = products.filter((item) => item.categoryId === Number.parseInt(categoryId));
+
+    const productsExceptMain = productsByCategory.filter(item => item.id !== product.id);
+
+    const related = productsExceptMain.splice(0, 5);
+    setRelatedProducts(related);
+  }, [product, products, categoryId])
 
   const linksBreadCrumb = [
     {

@@ -25,8 +25,26 @@
 
                     .name,
                     .category,
-                    .price {
+                    .price,
+                    .quantity__text {
                         font-weight: 600;
+                    }
+
+                    .quantity {
+                        .changefield {
+                            display: flex;
+                            align-items: center;
+
+                            .quantity__text {
+                                margin-right: 50px;
+                            }
+
+                            .quantity__btn {
+                                margin-left: 20px;
+                                cursor: pointer;
+                                color: #1890ff;
+                            }
+                        }
                     }
                 }
 

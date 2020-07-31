@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import "./index.scss";
 import { Input } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import axiosService from "../../utils/axiosService";
-import { getInfoProducts, searchProduct } from "../../action/action";
+import { searchProduct } from "../../action/action";
 import { useHistory } from "react-router-dom";
+import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
+const { Search } = Input;
 
 export default function Banner() {
   const dispatch = useDispatch();
   const stateSearch = useSelector((state) => state.products);
 
   const search = stateSearch.searchProducts;
-  console.log("stateSearch :>> ", stateSearch);
-  console.log("search", search);
+
   const history = useHistory();
 
-  const { Search } = Input;
   const handleNavigateSearch = (search) => {
     history.push({
       pathname: `/search`,
@@ -23,10 +23,9 @@ export default function Banner() {
     });
   };
   const handleSearch = (value) => {
-    console.log("searching.. %o", value);
     axiosService
       .get(
-        `https://5c6521b719df280014b6267d.mockapi.io/api/products?search=${value}`
+        `${ENDPOINT}${GET_PRODUCTS_API}?search=${value}`
       )
       .then((res) => {
         dispatch(searchProduct(res.data));

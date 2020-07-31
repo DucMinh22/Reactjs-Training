@@ -2,6 +2,8 @@ $color-text: rgb(120, 120, 120);
 $font-text-small: 13px;
 
 .frame {
+  cursor: pointer;
+
   img {
     width: 250px;
   }
@@ -24,7 +26,7 @@ $font-text-small: 13px;
       margin-bottom: 5px;
     }
 
-    p2 {
+    p {
       color: $color-text;
       font-size: $font-text-small;
     }
