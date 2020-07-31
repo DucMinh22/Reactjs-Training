@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Button } from "antd";
 import { DoubleRightOutlined } from "@ant-design/icons";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./index.scss";
-import axios from "axios";
-import DetailsItem from "./DetailsItem";
 import { useSelector } from "react-redux";
 import ItemProducts from "../ItemProducts/index";
 

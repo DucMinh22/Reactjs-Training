@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.scss";
 import ProductRow from "./ProductsRow";
 import { useHistory } from "react-router-dom";
