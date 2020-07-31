@@ -7,6 +7,10 @@ export default function Search() {
   const stateSearch = useSelector((state) => state.products);
   const search = stateSearch.searchProducts;
   const history = useHistory();
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/nmduc
   const dataSearch = search.map((item, key) => (
     <div className="wrapper-item">
       <ItemProducts
@@ -24,9 +28,9 @@ export default function Search() {
 
   return (
     <div>
-      <h3>Searching result : {history.location.state.key} </h3>
+      <h3>Searching result : "{history.location.state.key}" </h3>
       <div className="search-title">
-        <h4>Product</h4>
+        <h4>Products: {search.length}</h4>
       </div>
       <div className="row">{dataSearch}</div>
     </div>

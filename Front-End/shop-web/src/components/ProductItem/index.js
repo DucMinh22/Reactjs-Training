@@ -46,6 +46,7 @@ export default function ProductItem() {
             View more <DoubleRightOutlined />
           </Button>
         </Link>
+
         <div className="row" style={{ width: "100%" }}>
           {renderData(categoryId)}
         </div>

@@ -11,7 +11,6 @@ const { Search } = Input;
 export default function Banner() {
   const dispatch = useDispatch();
   const stateSearch = useSelector((state) => state.products);
-
   const search = stateSearch.searchProducts;
 
   const history = useHistory();
@@ -50,6 +49,7 @@ export default function Banner() {
           onSearch={handleSearch}
         />
       </div>
+      <div className="background"></div>
     </div>
   );
 }

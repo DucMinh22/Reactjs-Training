@@ -6,54 +6,10 @@ body {
   background-color: rgb(239, 239, 239);
   .container {
     .category {
+      margin-top: 30px;
       h4 {
         color: #7fad39;
-      }
-      .wrapper-item {
-        padding: 10px;
-
-        background-color: rgb(255, 255, 255);
-        &:hover {
-          background-color: rgb(255, 255, 255);
-          box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
-        }
-
-        a {
-          color: black;
-          &:hover {
-            text-decoration: none;
-            color: black;
-          }
-          .frame {
-            img {
-              width: 250px;
-            }
-            .title-product {
-              color: $font-text-small;
-              margin-top: 10px;
-              p {
-                margin-bottom: 5px;
-              }
-            }
-            .price {
-              display: flex;
-              p {
-                margin-right: 13px;
-                font-weight: bold;
-                margin-bottom: 5px;
-              }
-              p2 {
-                color: $color-text;
-                font-size: $font-text-small;
-              }
-            }
-            .origin-price {
-              color: $color-text;
-              font-size: $font-text-small;
-              text-decoration: line-through;
-            }
-          }
-        }
+        position: absolute;
       }
     }
   }
