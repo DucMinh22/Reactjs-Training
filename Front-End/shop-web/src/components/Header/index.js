@@ -44,9 +44,6 @@ export default function Header() {
   const showModal = () => {
     setVisible(true);
   };
-  const handleOk = () => {
-    setVisible(false);
-  };
   const handleSignOut = () => {
     localStorage.removeItem("name");
   };
@@ -79,20 +76,6 @@ export default function Header() {
                     {item.name === "Login" && localStorage.getItem("name")
                       ? localStorage.getItem("name")
                       : item.name}
-                    {/* 
-                    {item.name !== "Login" && (
-                      <div className="sucsessLogin">
-                        <div class="toggler Userstyle__UserDropDown-sc-6e6am-5 cVRwHa">
-                          <button class="Userstyle__UserDropDownButton-sc-6e6am-10 dYkBsI">
-                            Sign out
-                          </button>
-                        </div>
-                      </div>
-                    )} */}
-                    {/* {localStorage.length > 0 && localStorage.removeItem("name")} */}
-                    {/* {className === "cVRwHa" && className === "Logout"
-                      ? localStorage.getItem("name")
-                      : item.name} */}
                     {item.name === "Login" && (
                       <div className="itemIcon Login">
                         <UserOutlined
@@ -125,7 +108,6 @@ export default function Header() {
                         <Modal
                           title="Login"
                           visible={visible}
-                          onOk={handleOk}
                           onCancel={handleCancel}
                         >
                           <Login onCancel={handleCancel} />
