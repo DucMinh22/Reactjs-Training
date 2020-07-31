@@ -53,12 +53,7 @@ export default function Header() {
   const handleCancel = () => {
     setVisible(false);
   };
-  const datalocalStore = () => {
-    if (localStorage.length > 0) {
-      localStorage.removeItem("name");
-      console.log("object");
-    }
-  };
+
   return (
     <Affix>
       <Row className="header">
