@@ -3,10 +3,14 @@ import { NavLink, useHistory } from "react-router-dom";
 import LOGO from "../../assets/images/logo1.png";
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import "./index.scss";
-import { Row, Col, Affix, Badge } from "antd";
-import { useSelector } from "react-redux";
+import { searchProduct } from "../../action/action";
+import { Row, Col, Affix, Badge, Input } from "antd";
+import { useSelector, useDispatch } from "react-redux";
 import Modal from "antd/lib/modal/Modal";
 import Login from "./Login";
+import Search from "../../containers/Search";
+import axiosService from "../../utils/axiosService";
+import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
 
 const MENU = [
   {
@@ -40,6 +44,7 @@ export default function Header() {
   const history = useHistory();
   const cartReducer = useSelector((state) => state.cart);
   const { cartProducts } = cartReducer;
+  const { Search } = Input;
 
   const showModal = () => {
     setVisible(true);
@@ -50,15 +55,48 @@ export default function Header() {
   const handleCancel = () => {
     setVisible(false);
   };
+  const dispatch = useDispatch();
+  const stateSearch = useSelector((state) => state.products);
+  const search = stateSearch.searchProduct;
 
+  const handleNavigateSearch = (search) => {
+    history.push({
+      pathname: `/search`,
+      state: { key: search },
+    });
+  };
+  const handleSearch = (value) => {
+    axiosService
+      .get(`${ENDPOINT}${GET_PRODUCTS_API}?search=${value}`)
+      .then((res) => {
+        dispatch(searchProduct(res.data));
+        handleNavigateSearch(value);
+      })
+      .catch((error) => {
+        console.log("Error fetching and parsing data", error);
+      });
+  };
   return (
     <Affix>
       <Row className="header">
         <Col span={16}>
-          <div className="logo">
-            <a href="/">
-              <img src={LOGO} className="logo__img" alt="Logo" />
-            </a>
+          <div className="row">
+            <div className="logo">
+              <a href="/">
+                <img src={LOGO} className="logo__img" alt="Logo" />
+              </a>
+            </div>
+            <Search
+              placeholder="input search text"
+              enterButton="Search"
+              size="large"
+              onSearch={handleSearch}
+              style={{
+                width: "70%",
+                marginLeft: "60px",
+                marginTop: "8px",
+              }}
+            />
           </div>
         </Col>
         <Col span={8}>
@@ -128,7 +166,7 @@ export default function Header() {
                     )}
                   </NavLink>
                   <div
-                    classNameName={`${
+                    className={`${
                       history.location.pathname === item.to ? "hr-active" : "hr"
                     }`}
                   ></div>

@@ -23,9 +23,7 @@ export default function Banner() {
   };
   const handleSearch = (value) => {
     axiosService
-      .get(
-        `${ENDPOINT}${GET_PRODUCTS_API}?search=${value}`
-      )
+      .get(`${ENDPOINT}${GET_PRODUCTS_API}?search=${value}`)
       .then((res) => {
         dispatch(searchProduct(res.data));
         handleNavigateSearch(value);
@@ -41,12 +39,6 @@ export default function Banner() {
           src="https://cf.shopee.vn/file/74428d8977c895ebd49b99b3745eb18e"
           className="img-fruid"
           alt=""
-        />
-        <Search
-          placeholder="input search text"
-          enterButton="Search"
-          size="large"
-          onSearch={handleSearch}
         />
       </div>
       <div className="background"></div>
