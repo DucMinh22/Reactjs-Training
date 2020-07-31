@@ -6,54 +6,40 @@ $font-text-small: 13px;
     padding: 10px;
     cursor: pointer;
 
-    &:hover {
-      background-color: rgb(255, 255, 255);
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
-    }
-
     img {
       width: 250px;
     }
 
-    .frame {
-      cursor: pointer;
-
-      img {
-        width: 250px;
-      }
-
-      .title-product {
-        color: $font-text-small;
-        margin-top: 10px;
-
-        p {
-          margin-bottom: 5px;
-        }
-      }
-
-      .price {
-        display: flex;
-
-        p {
-          margin-right: 13px;
-          font-weight: bold;
-          margin-bottom: 5px;
-        }
-
-        p {
-          color: $color-text;
-          font-size: $font-text-small;
-        }
-      }
+    .title-product {
+      color: $font-text-small;
+      margin-top: 10px;
 
       p {
-        .origin-price {
-          color: $color-text;
-          font-size: $font-text-small;
-          text-decoration: line-through;
-        }
+        margin-bottom: 5px;
       }
     }
 
+    .price {
+      display: flex;
+
+      p {
+        margin-right: 13px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: $color-text;
+        font-size: $font-text-small;
+      }
+    }
+
+    .origin-price {
+      color: $color-text;
+      font-size: $font-text-small;
+      text-decoration: line-through;
+    }
+
+    &:hover {
+      background-color: rgb(255, 255, 255);
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 20px;
+    }
   }
 }
