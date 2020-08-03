@@ -40,7 +40,7 @@
       #login {
         position: relative;
 
-        .cVRwHa {
+        .loginDropdown {
           display: block;
           z-index: -1 !important;
           opacity: 0;
@@ -61,7 +61,7 @@
           padding: 10px 0px;
           border-radius: 0px 0px 3px 3px;
 
-          .dYkBsI {
+          .loginBtn {
             color: rgb(74, 74, 74);
             display: inline-block;
             font-weight: 400;
@@ -89,7 +89,7 @@
         }
 
         &:hover {
-          .cVRwHa {
+          .loginDropdown {
             opacity: 1;
             z-index: 99 !important;
           }
@@ -113,6 +113,7 @@
   border: 2px solid $primaryGreen;
 }
 
-.ant-btn-primary {
-  background-color: #7fad39;
+.ant-input-search-button {
+  background-color: #7fad39 !important;
+  border: none !important;
 }

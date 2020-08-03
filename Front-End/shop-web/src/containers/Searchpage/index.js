@@ -21,13 +21,13 @@ export default function Search() {
         price={item.price}
         percent={item.percent}
         categoryId={item.categoryId}
-      ></ItemProducts>
+      />
     </div>
   ));
 
   return (
     <div>
-      <h3>{t(`searchpage.key`)} : "{history.location.state.key}" </h3>
+      <h3>{t(`searchpage.key`)} : "{history.location.state?.key}" </h3>
       <div className="search-title">
         <h4>{t(`searchpage.products`)}: {search.length}</h4>
       </div>

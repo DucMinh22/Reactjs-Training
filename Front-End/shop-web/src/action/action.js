@@ -11,6 +11,10 @@ import {
   PAY_PRODUCT,
   CONFIRM_PAYMENT,
   UPDATE_CART_PRODUCT,
+  GET_ALL_BILLS,
+  GET_PRODUCTS_BILL,
+  GET_STATE_BILLS,
+  REMOVE_BILLS,
 } from "./actionTypes";
 
 export const getAllProducts = () => {
@@ -70,26 +74,54 @@ export const searchProduct = (product) => {
 export const purchaseProduct = (product) => {
   return {
     type: PAY_PRODUCT,
-    product
-  }
-}
+    product,
+  };
+};
 
 export const purchaseAllProduct = () => {
   return {
-    type: PAY_ALL_PRODUCTS
-  }
-}
+    type: PAY_ALL_PRODUCTS,
+  };
+};
 
 export const confirmPurchase = () => {
   return {
     type: CONFIRM_PAYMENT,
-  }
-}
+  };
+};
+
+export const getAllBillsID = (bill) => {
+  return {
+    type: GET_ALL_BILLS,
+    payload: bill,
+  };
+};
+
+export const getProductBills = (products) => {
+  return {
+    type: GET_PRODUCTS_BILL,
+    payload: products,
+  };
+};
+
+export const getStateBills = (statebill) => {
+  return {
+    type: GET_STATE_BILLS,
+    payload: statebill,
+  };
+};
+
+export const removeBills = (BillsId) => {
+  return {
+    type: REMOVE_BILLS,
+    BillsId,
+  };
+};
 
 export const updateCart = (product) => {
-  console.log('product', product)
+  console.log("product", product);
   return {
     type: UPDATE_CART_PRODUCT,
-    product
-  }
-}
+    product,
+  };
+};

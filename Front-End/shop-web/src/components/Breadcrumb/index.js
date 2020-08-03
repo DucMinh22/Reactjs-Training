@@ -18,7 +18,7 @@ export default function BreadCrumb({ links, nameActivePage, ...rest }) {
                         )
                     })
                 }
-                <Item>{nameActivePage}</Item>
+                <Item className="activepage">{nameActivePage}</Item>
             </Breadcrumb>
         </div>
     )

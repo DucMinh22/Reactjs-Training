@@ -6,12 +6,17 @@ import "./index.scss";
 import { useSelector } from "react-redux";
 import ItemProducts from "../ItemProducts/index";
 import { useTranslation } from "react-i18next";
+import LazyComponent from "../LazyComp";
 
 export default function ProductItem() {
   const stateProducts = useSelector((state) => state.products);
   const { t } = useTranslation('common');
   const { products } = stateProducts;
+
   const renderData = (categoryId) => {
+    if (products.length === 0) {
+      return new Array(3).fill(true).map((item, index) => <LazyComponent key={index} />)
+    }
     const data = products.filter(
       (product) => product.categoryId === categoryId
     );
@@ -29,7 +34,7 @@ export default function ProductItem() {
       </div>
     ));
   };
-  const rederLink = (categoryId) => {
+  const renderLink = (categoryId) => {
     return (
       <div>
         <Link
@@ -43,6 +48,9 @@ export default function ProductItem() {
               float: "right",
               color: "#7fad39",
               border: "1px solid #7fad39",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center"
             }}
           >
             {t(`homepage.viewMore`)} <DoubleRightOutlined />
@@ -60,11 +68,11 @@ export default function ProductItem() {
       <div className="container">
         <div className="category">
           <h4>{t(`homepage.computer`)}</h4>
-          {rederLink(1)}
+          {renderLink(1)}
         </div>
         <div className="category">
           <h4>{t(`homepage.clothing`)}</h4>
-          {rederLink(2)}
+          {renderLink(2)}
         </div>
       </div>
     </div>

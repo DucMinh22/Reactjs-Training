@@ -25,7 +25,9 @@ export default function CartPage() {
         ));
     };
 
+    // sum price
     const total = cartProducts.reduce((total, currentItem) => total + Number.parseInt(currentItem.price) * Number.parseInt(currentItem.quantity), 0);
+
     // pay one product
     const payItemProduct = useCallback((product) => {
         // dispatch(purchaseProduct(product));

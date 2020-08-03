@@ -14,20 +14,16 @@ export default function ItemProducts(props) {
   };
 
   return (
-    <div>
-      <div className="frame">
-        <div onClick={handleNavigateDetail}>
-          <img src={image} className="img-fluid" alt="" />
-          <div className="title-product">
-            <p>{title}</p>
-          </div>
-          <div className="price">
-            <p>$ {price}</p>
-            <p>{percent}%</p>
-          </div>
-          <div className="origin-price">$ 6.690</div>
-        </div>
+    <div className="frame" onClick={handleNavigateDetail}>
+      <img src={image} className="img-fluid" alt={title} />
+      <div className="title-product">
+        <p>{title}</p>
       </div>
+      <div className="price">
+        <p>$ {price}</p>
+        <p>{percent}%</p>
+      </div>
+      <div className="origin-price">$ 6.690</div>
     </div>
   );
 }

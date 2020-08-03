@@ -1,6 +1,5 @@
 .container {
     .row {
-
         .info-product {
             .rate {
                 display: flex;
@@ -46,9 +45,8 @@
     }
 
     .relatedField {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        display: grid;
+        grid-template-columns: auto auto auto;
         margin-top: 30px;
     }
 }
