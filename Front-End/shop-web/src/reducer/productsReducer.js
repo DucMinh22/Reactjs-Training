@@ -4,6 +4,10 @@ import {
   GET_ALL_PRODUCTS_FAILURE,
   GET_INFO_PRODUCTS,
   SEARCH_PRODUCT_ITEM,
+  GET_ALL_BILLS,
+  GET_PRODUCTS_BILL,
+  GET_STATE_BILLS,
+  REMOVE_BILLS,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -11,6 +15,9 @@ const initialState = {
   loading: false,
   error: "",
   searchProducts: [],
+  bills: [],
+  productsbill: {},
+  stateBills: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -42,6 +49,29 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         searchProducts: action.payload,
+      };
+    case GET_ALL_BILLS:
+      return {
+        ...state,
+        bills: action.payload,
+      };
+    case GET_PRODUCTS_BILL:
+      return {
+        ...state,
+        productsbill: action.payload,
+      };
+    case GET_STATE_BILLS:
+      return {
+        ...state,
+        stateBills: action.payload,
+      };
+    case REMOVE_BILLS:
+      const prbill = [...state.bills].filter(
+        (product) => product.id !== action.BillsId
+      );
+      return {
+        ...state,
+        bills: prbill,
       };
     default:
       return state;

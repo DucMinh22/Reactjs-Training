@@ -7,9 +7,10 @@ import CartPage from "./Cartpage";
 import Productdetails from "./ProductDetails";
 import AdminHompage from "./Admin";
 import SearchPage from "./Searchpage";
+import ProductPage from "./Productpage";
+import BillsDetail from "./BillsDetailPage";
 
 import "antd/dist/antd.css";
-import ProductPage from "./Productpage";
 
 function App() {
   return (
@@ -30,6 +31,10 @@ function App() {
       <Route
         path="/search"
         render={() => <Layout component={SearchPage} />}
+      />
+      <Route
+        path="/bills-detail/:id"
+        render={() => <Layout component={BillsDetail} />}
       />
       <Route
         path="/ProductsDetail/:id"
