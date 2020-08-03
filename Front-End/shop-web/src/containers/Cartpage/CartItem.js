@@ -12,6 +12,7 @@ export default function CartItem({ product, onPay, onRemove }) {
     const dispatch = useDispatch();
     const { t } = useTranslation('common');
 
+    // open field to change quantity
     const openChangeQuantity = () => {
         let newChange;
         if (changeQuantity.indexOf(product.id) !== -1) {
@@ -23,17 +24,18 @@ export default function CartItem({ product, onPay, onRemove }) {
         setChangeQuantity(newChange);
     }
 
+    // change quantity
     const onChange = (value) => {
         setQuantity(value);
     }
 
+    // add to cart
     const addToCart = () => {
         const updatedProduct = {
             ...product,
             quantity: quantity
         }
         message.success("Update to cart successfully");
-        console.log('updatedProduct', updatedProduct)
         dispatch(updateCart(updatedProduct));
         openChangeQuantity(product.id)
     }

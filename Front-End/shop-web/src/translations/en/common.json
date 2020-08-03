@@ -64,6 +64,9 @@
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signOut": "Sign Out",
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
     "detailpage": {
         "addToCart": "Add To Cart",
         "relatedProducts": "Related Products"
@@ -72,7 +75,8 @@
         "home": "Home",
         "category": "Category",
         "cart": "Cart",
-        "login": "Login"
+        "login": "Login",
+        "products": "Products"
     },
     "searchpage": {
         "key": "Searching result",

@@ -32,12 +32,12 @@
     },
     "cartpage": {
         "yourCart": "Giỏ hàng",
-        "removeAll": "Xóa Tất Sản Phẩm",
+        "removeAll": "Xóa Tất Cả Sản Phẩm",
         "totalProducts": "Tổng số sản phầm trong giỏ hàng của bạn",
         "noProducts": "Bạn không có sản phẩm nào trong giỏ hàng",
         "payment": "Thanh Toán",
         "total": "Tổng",
-        "purchaseAll": "Thanh Toán Tất",
+        "purchaseAll": "Thanh Toán Toàn Bộ",
         "delivery": "Vận Chuyển",
         "confirmPurchase": "Xác Nhận Giao Dịch",
         "table": {
@@ -64,6 +64,9 @@
     "signIn": "Đăng Nhập",
     "signUp": "Đăng Ký",
     "signOut": "Đăng Xuất",
+    "login": "Đăng nhập",
+    "username": "Tên tài khoản",
+    "password": "Mật khẩu",
     "detailpage": {
         "addToCart": "Thêm Vào Giỏ Hàng",
         "relatedProducts": "Sản Phẩm Liên Quan"
@@ -72,7 +75,8 @@
         "home": "Trang Chủ",
         "category": "Phân Loại",
         "cart": "Giỏ Hàng",
-        "login": "Đăng Nhập"
+        "login": "Đăng Nhập",
+        "products": "Sản phẩm"
     },
     "searchpage": {
         "key": "Kết quả tìm kiếm",

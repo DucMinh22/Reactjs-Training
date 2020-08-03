@@ -4,12 +4,12 @@ import { EuroCircleOutlined } from '@ant-design/icons'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllCategories, getProductsByCategory } from '../../action/action';
 import './index.scss'
-import Loading from '../../components/Loading';
 import { useHistory } from 'react-router-dom';
 import ItemProducts from '../../components/ItemProducts';
 import Button from '../../components/Button';
 import BreadCrumb from '../../components/Breadcrumb';
 import { useTranslation } from 'react-i18next';
+import LazyComponent from '../../components/LazyComp';
 
 const { Sider, Content } = Layout;
 
@@ -46,6 +46,7 @@ export default function CategoryPage() {
         }
     }, [chosenCategory, option])
 
+    // change category
     const handleChooseCategory = useCallback((id) => {
         setChosenCategory(id);
         setOption(prevState => {
@@ -60,6 +61,7 @@ export default function CategoryPage() {
         setSortBy('')
     }, [])
 
+    // load more
     const handleLoadMore = () => {
         setOption(prevState => {
             return {
@@ -69,7 +71,11 @@ export default function CategoryPage() {
         })
     }
 
+    // render category products
     const renderProducts = (arr) => {
+        if (loading) {
+            return new Array(6).fill(true).map((item, index) => <LazyComponent key={index} />)
+        }
         return arr.map(product => {
             return (
                 <div className="mainContent__item" key={product.id}>
@@ -88,16 +94,18 @@ export default function CategoryPage() {
         })
     }
 
+    // select type
     const handleChangeType = useCallback((value) => {
         setSortBy(value);
     }, []);
 
+    // select order
     const handleChangeOrder = useCallback((value) => {
         setOrder(value)
     }, []);
 
+    // handle search
     const handleSearch = useCallback(() => {
-
         setOption(prev => {
             return {
                 ...prev,
@@ -117,7 +125,6 @@ export default function CategoryPage() {
 
     return (
         <div>
-            {loading && <Loading />}
             <Layout className="category">
                 <Sider className="menu">
                     <p className="menu__title">{t(`categorypage.title`)}</p>

@@ -6,7 +6,6 @@ import ProductItem from "../../components/ProductItem/index";
 import axiosService from "../../utils/axiosService";
 import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
 import Banner from "../../components/Banner";
-import Search from "../Search/index";
 
 export default function HomePage() {
   const dispatch = useDispatch();

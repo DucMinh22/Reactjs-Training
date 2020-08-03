@@ -6,23 +6,38 @@ import HomePage from "./Homepage";
 import CartPage from "./Cartpage";
 import Productdetails from "./ProductDetails";
 import AdminHompage from "./Admin";
+import SearchPage from "./Searchpage";
+
 import "antd/dist/antd.css";
-import Search from "./Search";
+import ProductPage from "./Productpage";
 
 function App() {
   return (
     <Switch>
-      <Route exact path="/" render={() => <Layout component={HomePage} />} />
+      <Route
+        exact
+        path="/"
+        render={() => localStorage.getItem("role") === "admin" ? <Layout component={AdminHompage} /> : <Layout component={HomePage} />}
+      />
       <Route
         path="/category"
         render={() => <Layout component={CategoryPage} />}
       />
-      <Route path="/cart" render={() => <Layout component={CartPage} />} />
-      <Route path="/search" render={() => <Layout component={Search} />} />
-      <Route path="/admin" render={() => <Layout component={AdminHompage} />} />
+      <Route
+        path="/cart"
+        render={() => <Layout component={CartPage} />}
+      />
+      <Route
+        path="/search"
+        render={() => <Layout component={SearchPage} />}
+      />
       <Route
         path="/ProductsDetail/:id"
         render={() => <Layout component={Productdetails} />}
+      />
+      <Route
+        path="/products"
+        render={() => <Layout component={ProductPage} />}
       />
     </Switch>
   );
