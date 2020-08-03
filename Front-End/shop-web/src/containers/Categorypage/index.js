@@ -38,13 +38,13 @@ export default function CategoryPage() {
 
     useEffect(() => {
         dispatch(getAllCategories());
-    }, [])
+    }, [dispatch])
 
     useEffect(() => {
         if (chosenCategory.length > 0 || chosenCategory) {
             dispatch(getProductsByCategory(chosenCategory, option));
         }
-    }, [chosenCategory, option])
+    }, [chosenCategory, option, dispatch])
 
     // change category
     const handleChooseCategory = useCallback((id) => {
@@ -114,7 +114,7 @@ export default function CategoryPage() {
                 page: 1,
             }
         })
-    }, [option, order, sortBy]);
+    }, [order, sortBy]);
 
     const linksBreadCrumb = [
         {
