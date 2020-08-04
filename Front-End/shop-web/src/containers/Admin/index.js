@@ -1,17 +1,32 @@
-import React, { useEffect } from "react";
-import { Table, Space, Popconfirm } from "antd";
-import { getAllBillsID, removeBills } from "../../action/action";
+import React, { useEffect, useState } from "react";
+import { Table, Space, Popconfirm, Input, Tooltip } from "antd";
+import {
+  getAllBillsID,
+  removeBills,
+  searchbillsByName,
+} from "../../action/action";
 import { ENDPOINT, GET_BILL_API } from "../../constant";
 import axiosService from "../../utils/axiosService";
 import { useDispatch, useSelector } from "react-redux";
-import { DeleteOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  SearchOutlined,
+  CloseOutlined,
+} from "@ant-design/icons";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
+import Form from "antd/lib/form/Form";
+import Search from "antd/lib/input/Search";
 
 export default function Admin() {
+  const [loading, setLoading] = useState(false);
+  const [searching, setSearching] = useState("");
   const dispatch = useDispatch();
+  const { Search } = Input;
   const history = useHistory();
   const stateBills = useSelector((state) => state.products);
+  const stateBillsSearch = useSelector((state) => state.products);
+  const { searchbills } = stateBillsSearch;
   const { bills } = stateBills;
 
   // componentDidMount
@@ -22,6 +37,19 @@ export default function Admin() {
     };
     fetchData();
   }, [dispatch]);
+
+  const handleSearch = (value) => {
+    setLoading(true);
+    axiosService
+      .get(`${ENDPOINT}${GET_BILL_API}?search=${value}`)
+      .then((res) => {
+        dispatch(searchbillsByName(res.data));
+      })
+      .catch((error) => {
+        console.log("Error fetching and parsing data", error);
+      })
+      .finally(() => setLoading(false));
+  };
 
   const handleButtonDetails = (id) => {
     history.push({
@@ -43,7 +71,6 @@ export default function Admin() {
       defaultSortOrder: "descend",
       sorter: (a, b) => a.id - b.id,
       render: (text, record) => {
-        console.log(record, "dulieu");
         return (
           <div
             style={{ cursor: "pointer" }}
@@ -111,7 +138,28 @@ export default function Admin() {
 
   return (
     <div>
-      <Table columns={columns} dataSource={bills} onChange={onChange} />;
+      <Search
+        placeholder="input search text"
+        enterButton="Search"
+        size="large"
+        onSearch={handleSearch}
+        loading={loading}
+      />
+      <h2 style={{ padding: "30px 0" }}>Bills Code Detail</h2>
+      <Table
+        onRow={(record, rowIndex) => {
+          return {
+            onClick: () => {
+              const { id } = record;
+              handleButtonDetails(id);
+            }, // click row
+          };
+        }}
+        columns={columns}
+        dataSource={bills}
+        onChange={onChange}
+      />
+      ;
     </div>
   );
 }

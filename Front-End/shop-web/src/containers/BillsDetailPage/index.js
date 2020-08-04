@@ -1,40 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Select, Table, Button } from "antd";
 import { useRouteMatch } from "react-router-dom";
 import axiosService from "../../utils/axiosService";
 import { ENDPOINT, GET_BILL_API } from "../../constant";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductBills } from "../../action/action";
+import { getProductBills, updateStateBills } from "../../action/action";
 import moment from "moment";
 
 function BillsDetail(props) {
   const dispatch = useDispatch();
   const stateProductsBill = useSelector((state) => state.products);
   const { productsbill } = stateProductsBill;
+  const [statusbill, setStatusbills] = useState("");
+
   const { Option } = Select;
   const match = useRouteMatch();
   const { id } = match.params;
 
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
-
+  const isChange = (value) => {
+    setStatusbills(value);
+  };
+  const UpdateStateBill = () => {
+    const body = {
+      ...productsbill,
+      status: statusbill,
+    };
+    axiosService.put(`${ENDPOINT}${GET_BILL_API}/${id}`, body).then((res) => {
+      dispatch(updateStateBills(res.data));
+      console.log(res);
+    });
+  };
   useEffect(() => {
     const fetch = async () => {
       let res = await axiosService.get(`${ENDPOINT}${GET_BILL_API}/${id}`);
       dispatch(getProductBills(res.data));
-      console.log(res.data);
+      setStatusbills(res.data.status);
     };
     fetch();
   }, [dispatch, id]);
 
   const columns = [
-    {
-      title: "No",
-      dataIndex: "age",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.age - b.age,
-    },
     {
       title: "Product Code",
       dataIndex: "id",
@@ -48,24 +53,36 @@ function BillsDetail(props) {
       title: "CreateAt",
       dataIndex: "createdAt",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.age - b.age,
       render: (text, record) => {
         const time = moment(record.createdAt).format("DD/MM/YYYY");
         return <div>{time}</div>;
       },
     },
     {
-      title: "UserName",
-      dataIndex: "username",
+      title: "Product Name",
+      dataIndex: "name",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.usename - b.usename,
+    },
+    {
+      title: "Category",
+      dataIndex: "category",
+      defaultSortOrder: "descend",
+    },
+    {
+      title: "Price",
+      dataIndex: "price",
+      defaultSortOrder: "descend",
+    },
+    {
+      title: "Quantity",
+      dataIndex: "quantity",
+      defaultSortOrder: "descend",
     },
 
     {
       title: "Status",
       dataIndex: "status",
       defaultSortOrder: "descend",
-      sorter: (a, b) => a.age - b.age,
     },
   ];
 
@@ -75,8 +92,10 @@ function BillsDetail(props) {
 
   return (
     <div>
-      <div className="User">User Name: {productsbill.username}</div>
-      <div className="buyedProducts">Products of Bill :</div>
+      <div className="buyedProducts">
+        <h2>Products of Bill :</h2>
+        <h6>Bill: {productsbill.username}</h6>{" "}
+      </div>
       <Table
         columns={columns}
         dataSource={productsbill.bills}
@@ -85,9 +104,11 @@ function BillsDetail(props) {
       <div className="row">
         <div className="Status">
           <Select
-            defaultValue="Shipping"
+            // defaultValue="Shipping"
             style={{ width: 120 }}
-            onChange={handleChange}
+            // onChange={handleChange}
+            value={statusbill}
+            onChange={(event) => isChange(event)}
           >
             <Option value="Shipping">Shipping</Option>
             <Option value="Incart">InCart</Option>
@@ -97,6 +118,7 @@ function BillsDetail(props) {
             style={{ marginLeft: "20px" }}
             type="primary"
             htmlType="submit"
+            onClick={UpdateStateBill}
           >
             Update
           </Button>
