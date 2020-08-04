@@ -61,6 +61,24 @@
             "confirm": "Confirm"
         }
     },
+    "warehousepage": {
+        "title": "Warehouse",
+        "add": "Add new",
+        "table": {
+            "number": "Number",
+            "productName": "Product Name",
+            "productCategory": "Product Category",
+            "supplier": "Supplier",
+            "price": "Price",
+            "quantity": "Quantity",
+            "date": "Created Date"
+        },
+        "modal": {
+            "ok": "Create",
+            "cancel": "Cancel",
+            "title": "Create New Product"
+        }
+    },
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signOut": "Sign Out",
@@ -76,7 +94,7 @@
         "category": "Category",
         "cart": "Cart",
         "login": "Login",
-        "products": "Products"
+        "warehouse": "Warehouse"
     },
     "searchpage": {
         "key": "Searching result",

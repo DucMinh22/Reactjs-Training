@@ -9,6 +9,7 @@ import BreadCrumb from "../../components/Breadcrumb";
 import { useSelector } from "react-redux";
 import ItemProducts from "../../components/ItemProducts";
 import { useTranslation } from "react-i18next";
+import LazyComponent from "../../components/LazyComp";
 
 export default function Productdetails() {
   const history = useHistory();
@@ -49,6 +50,10 @@ export default function Productdetails() {
     setRelatedProducts(related);
   }, [product, products, categoryId])
 
+  const renderLazyComp = () => {
+    new Array(3).fill(true).map((item, index) => <LazyComponent key={index} />)
+  }
+
   const linksBreadCrumb = [
     {
       name: "Home",
@@ -71,6 +76,7 @@ export default function Productdetails() {
         />
         <h4 style={{ marginTop: "30px" }}>{t(`detailpage.relatedProducts`)}</h4>
         <div className="relatedField">
+          {relatedProducts?.length === 0 && renderLazyComp}
           {relatedProducts.map((item) => {
             return (
               <div className="mainContent__item" key={item.id}>

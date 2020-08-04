@@ -124,7 +124,7 @@ export default function Header() {
                                                                 {localStorage.getItem("name") ? (
                                                                     <button
                                                                         onClick={handleSignOut}
-                                                                        class="loginBtn"
+                                                                        className="loginBtn"
                                                                     > {t(`signOut`)} </button>
                                                                 ) : (
                                                                         <>

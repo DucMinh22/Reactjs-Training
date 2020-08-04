@@ -61,6 +61,24 @@
             "confirm": "Xác nhận"
         }
     },
+    "warehousepage": {
+        "title": "Kho hàng",
+        "add": "Thêm mới",
+        "table": {
+            "number": "Số",
+            "productName": "Tên Sản Phẩm",
+            "productCategory": "Loại Sản Phẩm",
+            "supplier": "Nhà Cung Cấp",
+            "price": "Giá",
+            "quantity": "Số Lượng",
+            "date": "Ngày Tạo"
+        },
+        "modal": {
+            "ok": "Tạo mới",
+            "cancel": "Hủy bỏ",
+            "title": "Tạo mới sản phẩm"
+        }
+    },
     "signIn": "Đăng Nhập",
     "signUp": "Đăng Ký",
     "signOut": "Đăng Xuất",
@@ -76,7 +94,7 @@
         "category": "Phân Loại",
         "cart": "Giỏ Hàng",
         "login": "Đăng Nhập",
-        "products": "Sản phẩm"
+        "warehouse": "Kho"
     },
     "searchpage": {
         "key": "Kết quả tìm kiếm",

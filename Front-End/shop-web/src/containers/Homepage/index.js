@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { getAllProducts, getInfoProducts } from "../../action/action";
-import { useDispatch, useSelector } from "react-redux";
+import { getInfoProducts } from "../../action/action";
+import { useDispatch } from "react-redux";
 import "./index.scss";
 import ProductItem from "../../components/ProductItem/index";
 import axiosService from "../../utils/axiosService";
@@ -9,8 +9,6 @@ import Banner from "../../components/Banner";
 
 export default function HomePage() {
   const dispatch = useDispatch();
-  const stateProducts = useSelector((state) => state.products);
-  const { products } = stateProducts;
   // componentDidMount
   useEffect(() => {
     const fetchData = async () => {
