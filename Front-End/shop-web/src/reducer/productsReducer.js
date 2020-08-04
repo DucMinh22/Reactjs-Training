@@ -8,6 +8,8 @@ import {
   GET_PRODUCTS_BILL,
   GET_STATE_BILLS,
   REMOVE_BILLS,
+  SEARCH_BILLS,
+  UPDATE_STATE_BILLS,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -18,6 +20,8 @@ const initialState = {
   bills: [],
   productsbill: {},
   stateBills: [],
+  searchbills: [],
+  updateStateBills: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -64,6 +68,16 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         stateBills: action.payload,
+      };
+    case SEARCH_BILLS:
+      return {
+        ...state,
+        searchbills: action.payload,
+      };
+    case UPDATE_STATE_BILLS:
+      return {
+        ...state,
+        updateStateBills: action.payload,
       };
     case REMOVE_BILLS:
       const prbill = [...state.bills].filter(
