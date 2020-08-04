@@ -71,12 +71,43 @@
             "supplier": "Supplier",
             "price": "Price",
             "quantity": "Quantity",
-            "date": "Created Date"
+            "date": "Created Date",
+            "description": "Description"
         },
         "modal": {
             "ok": "Create",
             "cancel": "Cancel",
             "title": "Create New Product"
+        }
+    },
+    "billpage": {
+        "title": "List of Bills",
+        "table": {
+            "billCode": "Bill Code",
+            "createdAt": "Created Date",
+            "user": "Username",
+            "bills": "Bills",
+            "status": "Status",
+            "action": "Action"
+        }
+    },
+    "billDetailPage": {
+        "title": "Detail of Bill",
+        "user": "Username",
+        "total": "Total Cost",
+        "update": "Update",
+        "table": {
+            "number": "Number",
+            "productName": "Product Name",
+            "productCategory": "Product Category",
+            "price": "Price",
+            "quantity": "Quantity",
+            "date": "Created Date"
+        },
+        "select": {
+            "inCart": "In Cart",
+            "shipping": "Shipping",
+            "done": "Done"
         }
     },
     "signIn": "Sign In",

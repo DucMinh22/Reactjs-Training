@@ -25,7 +25,8 @@ export default function WarehousePage() {
         supplier: "",
         price: 0,
         quantity: 0,
-        createdAt: ""
+        createdAt: "",
+        description: ""
     });
     const searchRef = useRef(null);
     const dispatch = useDispatch();
@@ -41,6 +42,9 @@ export default function WarehousePage() {
     const columns = TableColumns();
     const { t } = useTranslation('common');
     const history = useHistory();
+
+    // get options for modal
+    const modalOptions = categories.map(item => ({ ...item, value: item.id }));
 
     // componentDidMount
     useEffect(() => {
@@ -71,9 +75,6 @@ export default function WarehousePage() {
         })
     }
 
-    // get options for modal
-    const modalOptions = categories.map(item => ({ ...item, value: item.id }));
-
     // handle change select
     const onChangeSelect = (value) => {
         setNewProduct(prev => {
@@ -93,7 +94,8 @@ export default function WarehousePage() {
 
     // check type number
     const isTypeNumber = (name, value) => {
-        return (typeof value !== 'number')
+        const regex = /^[0-9]*$/;
+        return (!regex.test(value))
             ? { [name]: "Must enter number" }
             : {}
     }
@@ -104,6 +106,7 @@ export default function WarehousePage() {
             ...isRequired("productName", newProduct.productName),
             ...isRequired("productCategory", newProduct.productCategory),
             ...isRequired("supplier", newProduct.supplier),
+            ...isRequired("description", newProduct.description),
             ...isTypeNumber("price", newProduct.price),
             ...isTypeNumber("quantity", newProduct.quantity),
         }
@@ -170,13 +173,24 @@ export default function WarehousePage() {
                         />
                     </Col>
                 </Row>
-                <Row>
+                <Row justify="space-between">
                     <Col xl={11} md={10} sm={12}>
                         <ModalInput
                             name="quantity"
                             label={t('warehousepage.table.quantity')}
                             value={newProduct.quantity}
                             placeholder="Input Product's Quantity"
+                            required
+                            onChange={onChangeInput}
+                        />
+                    </Col>
+                    <Col xl={11} md={10} sm={12}>
+                        <ModalInput
+                            type="textarea"
+                            name="description"
+                            label={t('warehousepage.table.description')}
+                            value={newProduct.description}
+                            placeholder="Input Product's Supplier"
                             required
                             onChange={onChangeInput}
                         />

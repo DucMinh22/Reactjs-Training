@@ -1,129 +1,127 @@
-import React, { useEffect, useState } from "react";
-import { Select, Table, Button } from "antd";
-import { useRouteMatch } from "react-router-dom";
-import axiosService from "../../utils/axiosService";
-import { ENDPOINT, GET_BILL_API } from "../../constant";
-import { useDispatch, useSelector } from "react-redux";
-import { getProductBills, updateStateBills } from "../../action/action";
-import moment from "moment";
+import React, { useEffect, useState } from "react"
+import { Select, Table, Button, message } from "antd"
+import { useRouteMatch } from "react-router-dom"
+import axiosService from "../../utils/axiosService"
+import { ENDPOINT, GET_BILL_API } from "../../constant"
+import { useDispatch, useSelector } from "react-redux"
+import { getProductBills, updateStateBills } from "../../action/action"
+import Loading from '../../components/Loading'
+import moment from "moment"
+import "./index.scss"
+import { useTranslation } from "react-i18next"
+const { Option } = Select;
 
-function BillsDetail(props) {
-  const dispatch = useDispatch();
-  const stateProductsBill = useSelector((state) => state.products);
-  const { productsbill } = stateProductsBill;
-  const [statusbill, setStatusbills] = useState("");
+function BillsDetail() {
+    const dispatch = useDispatch();
+    const stateProductsBill = useSelector((state) => state.products);
+    const { productsbill } = stateProductsBill;
+    const [statusbill, setStatusbills] = useState("");
+    const [loading, setLoading] = useState(false);
+    const match = useRouteMatch();
+    const { t } = useTranslation('common');
+    const { id } = match.params;
 
-  const { Option } = Select;
-  const match = useRouteMatch();
-  const { id } = match.params;
+    useEffect(() => {
+        setLoading(true);
+        const fetch = async () => {
+            let res = await axiosService.get(`${ENDPOINT}${GET_BILL_API}/${id}`);
+            dispatch(getProductBills(res.data));
+            setStatusbills(res.data.status);
+            setLoading(false)
+        };
+        fetch();
+    }, [dispatch, id]);
 
-  const isChange = (value) => {
-    setStatusbills(value);
-  };
-  const UpdateStateBill = () => {
-    const body = {
-      ...productsbill,
-      status: statusbill,
+    const isChange = (value) => {
+        setStatusbills(value);
     };
-    axiosService.put(`${ENDPOINT}${GET_BILL_API}/${id}`, body).then((res) => {
-      dispatch(updateStateBills(res.data));
-      console.log(res);
-    });
-  };
-  useEffect(() => {
-    const fetch = async () => {
-      let res = await axiosService.get(`${ENDPOINT}${GET_BILL_API}/${id}`);
-      dispatch(getProductBills(res.data));
-      setStatusbills(res.data.status);
+    const updateStateBill = () => {
+        const body = {
+            ...productsbill,
+            status: statusbill,
+        };
+        axiosService.put(`${ENDPOINT}${GET_BILL_API}/${id}`, body).then((res) => {
+            dispatch(updateStateBills(res.data));
+            message.success("Updated successfully !!!")
+        });
     };
-    fetch();
-  }, [dispatch, id]);
 
-  const columns = [
-    {
-      title: "Product Code",
-      dataIndex: "id",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.id - b.id,
-      render: (text, record) => {
-        return <div style={{ cursor: "pointer" }}>{record.id}</div>;
-      },
-    },
-    {
-      title: "CreateAt",
-      dataIndex: "createdAt",
-      defaultSortOrder: "descend",
-      render: (text, record) => {
-        const time = moment(record.createdAt).format("DD/MM/YYYY");
-        return <div>{time}</div>;
-      },
-    },
-    {
-      title: "Product Name",
-      dataIndex: "name",
-      defaultSortOrder: "descend",
-    },
-    {
-      title: "Category",
-      dataIndex: "category",
-      defaultSortOrder: "descend",
-    },
-    {
-      title: "Price",
-      dataIndex: "price",
-      defaultSortOrder: "descend",
-    },
-    {
-      title: "Quantity",
-      dataIndex: "quantity",
-      defaultSortOrder: "descend",
-    },
+    const columns = [
+        {
+            title: t(`billDetailPage.table.number`),
+            dataIndex: "id",
+            sorter: (a, b) => a.id - b.id,
+            render: (text, record) => {
+                return <div style={{ cursor: "pointer" }}>{record.id}</div>;
+            },
+        },
+        {
+            title: t(`billDetailPage.table.date`),
+            dataIndex: "createdAt",
+            render: (text, record) => {
+                const time = moment(record.createdAt).format("DD/MM/YYYY");
+                return <div>{time}</div>;
+            },
+        },
+        {
+            title: t(`billDetailPage.table.productName`),
+            dataIndex: "name",
+        },
+        {
+            title: t(`billDetailPage.table.productCategory`),
+            dataIndex: "category",
+        },
+        {
+            title: t(`billDetailPage.table.price`),
+            dataIndex: "price",
+        },
+        {
+            title: t(`billDetailPage.table.quantity`),
+            dataIndex: "quantity",
+        }
+    ];
 
-    {
-      title: "Status",
-      dataIndex: "status",
-      defaultSortOrder: "descend",
-    },
-  ];
+    function onChange(pagination, filters, sorter, extra) {
+        console.log("params", pagination, filters, sorter, extra);
+    }
 
-  function onChange(pagination, filters, sorter, extra) {
-    console.log("params", pagination, filters, sorter, extra);
-  }
+    return (
+        <div>
+            {loading && <Loading />}
+            <div className="buyedProducts">
+                <h2>{t(`billDetailPage.title`)}</h2>
+            </div>
+            <div className="info">
+                <div className="info-detail">
+                    <p>{t(`billDetailPage.user`)}: {productsbill.username}</p>
+                    <p>{t(`billDetailPage.total`)}: </p>
+                </div>
+                <div className="Status">
+                    <Select
+                        style={{ width: 120 }}
+                        value={statusbill}
+                        onChange={(event) => isChange(event)}
+                    >
+                        <Option value="Shipping">{t(`billDetailPage.select.shipping`)}</Option>
+                        <Option value="Incart">{t(`billDetailPage.select.inCart`)}</Option>
+                        <Option value="done">{t(`billDetailPage.select.done`)}</Option>
+                    </Select>
+                    <Button
+                        style={{ marginLeft: "20px" }}
+                        type="primary"
+                        htmlType="submit"
+                        onClick={updateStateBill}
+                    >{t(`billDetailPage.update`)}</Button>
+                </div>
+            </div>
+            <Table
+                columns={columns}
+                dataSource={productsbill.bills?.map(item => ({ ...item, key: item.id }))}
+                onChange={onChange}
+            />
 
-  return (
-    <div>
-      <div className="buyedProducts">
-        <h2>Products of Bill :</h2>
-        <h6>Bill: {productsbill.username}</h6>{" "}
-      </div>
-      <Table
-        columns={columns}
-        dataSource={productsbill.bills}
-        onChange={onChange}
-      />
-      <div className="row">
-        <div className="Status">
-          <Select
-            style={{ width: 120 }}
-            value={statusbill}
-            onChange={(event) => isChange(event)}
-          >
-            <Option value="Shipping">Shipping</Option>
-            <Option value="Incart">InCart</Option>
-            <Option value="done">Done</Option>
-          </Select>
-          <Button
-            style={{ marginLeft: "20px" }}
-            type="primary"
-            htmlType="submit"
-            onClick={UpdateStateBill}
-          >
-            Update
-          </Button>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default BillsDetail;

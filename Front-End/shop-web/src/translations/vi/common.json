@@ -71,12 +71,43 @@
             "supplier": "Nhà Cung Cấp",
             "price": "Giá",
             "quantity": "Số Lượng",
-            "date": "Ngày Tạo"
+            "date": "Ngày Tạo",
+            "description": "Mô Tả"
         },
         "modal": {
             "ok": "Tạo mới",
             "cancel": "Hủy bỏ",
             "title": "Tạo mới sản phẩm"
+        }
+    },
+    "billpage": {
+        "title": "Danh sách hóa đơn",
+        "table": {
+            "billCode": "Mã Hóa Đơn",
+            "createdAt": "Ngày Tạo",
+            "user": "Người Mua",
+            "bills": "Số Lượng Sp",
+            "status": "Tình Trạng",
+            "action": "Thao Tác"
+        }
+    },
+    "billDetailPage": {
+        "title": "Thông tin chi tiết hóa đơn",
+        "user": "Người mua",
+        "total": "Tổng",
+        "update": "Thay đổi",
+        "table": {
+            "number": "Số",
+            "productName": "Tên Sản Phẩm",
+            "productCategory": "Loại Sản Phẩm",
+            "price": "Giá",
+            "quantity": "Số Lượng",
+            "date": "Ngày Tạo"
+        },
+        "select": {
+            "inCart": "Trong giỏ hàng",
+            "shipping": "Đang vẫn chuyển",
+            "done": "Hoàn Thành"
         }
     },
     "signIn": "Đăng Nhập",
