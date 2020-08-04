@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, Popconfirm, Input, Tooltip } from "antd";
+import { Table, Space, Popconfirm, Input } from "antd";
 import {
   getAllBillsID,
   removeBills,
@@ -10,23 +10,16 @@ import axiosService from "../../utils/axiosService";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DeleteOutlined,
-  SearchOutlined,
-  CloseOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
 import { useHistory } from "react-router-dom";
-import Form from "antd/lib/form/Form";
-import Search from "antd/lib/input/Search";
 
 export default function Admin() {
   const [loading, setLoading] = useState(false);
-  const [searching, setSearching] = useState("");
   const dispatch = useDispatch();
   const { Search } = Input;
   const history = useHistory();
   const stateBills = useSelector((state) => state.products);
-  const stateBillsSearch = useSelector((state) => state.products);
-  const { searchbills } = stateBillsSearch;
   const { bills } = stateBills;
 
   // componentDidMount

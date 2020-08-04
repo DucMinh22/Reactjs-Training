@@ -135,7 +135,6 @@ export const updateStateBills = (status) => {
 };
 
 export const updateCart = (product) => {
-  console.log("product", product);
   return {
     type: UPDATE_CART_PRODUCT,
     product,
