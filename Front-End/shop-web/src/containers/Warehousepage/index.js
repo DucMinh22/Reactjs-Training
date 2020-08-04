@@ -2,16 +2,17 @@ import React, { useEffect, useState, useRef } from 'react'
 import Button from '../../components/Button'
 import Loading from '../../components/Loading'
 import './index.scss'
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllProducts, getAllCategories, searchProduct } from '../../action/action';
-import { Table, Modal, Row, Col, Input } from 'antd';
-import TableColumns from './warehouseTableCol';
-import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
-import ModalInput from '../../components/ModalInput';
-import axiosService from '../../utils/axiosService';
-import { ENDPOINT, GET_PRODUCTS_API } from '../../constant';
-import { CloseOutlined } from '@ant-design/icons';
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllProducts, getAllCategories, searchProduct } from '../../action/action'
+import { Table, Modal, Row, Col, Input, message } from 'antd';
+import TableColumns from './warehouseTableCol'
+import { useTranslation } from 'react-i18next'
+import { useHistory } from 'react-router-dom'
+import ModalInput from '../../components/ModalInput'
+import axiosService from '../../utils/axiosService'
+import { ENDPOINT, GET_PRODUCTS_API } from '../../constant'
+import { CloseOutlined } from '@ant-design/icons'
+import * as _ from 'lodash'
 
 const { Search } = Input;
 
@@ -24,7 +25,7 @@ export default function WarehousePage() {
         supplier: "",
         price: 0,
         quantity: 0,
-        creaatedAt: ""
+        createdAt: ""
     });
     const searchRef = useRef(null);
     const dispatch = useDispatch();
@@ -34,25 +35,30 @@ export default function WarehousePage() {
     const { products, loading, searchProducts } = productsReducer;
     const dataTable = () => {
         return isSearching
-            ? searchProducts?.length > 0 && searchProducts.map(item => ({ ...item, key: item.id }))
-            : products?.length > 0 && products.map(item => ({ ...item, key: item.id }))
+            ? searchProducts?.length > 0 && searchProducts.map(item => ({ ...item, key: item.id })) // fetch search data
+            : products?.length > 0 && products.map(item => ({ ...item, key: item.id })) // fetch all data
     };
     const columns = TableColumns();
     const { t } = useTranslation('common');
     const history = useHistory();
+
+    // componentDidMount
     useEffect(() => {
         dispatch(getAllProducts());
         dispatch(getAllCategories());
     }, [dispatch]);
 
+    // navigate detail page
     const handleNavigateDetail = (id) => {
         history.push(`/warehouse-detail/${id}`)
     }
 
+    // handle open or close modal
     const handleOpenCloseModal = () => {
         setVisible(prev => !prev)
     }
 
+    // handle change input
     const onChangeInput = e => {
         const name = e.target.name;
         const value = e.target.value;
@@ -65,8 +71,10 @@ export default function WarehousePage() {
         })
     }
 
+    // get options for modal
     const modalOptions = categories.map(item => ({ ...item, value: item.id }));
 
+    // handle change select
     const onChangeSelect = (value) => {
         setNewProduct(prev => {
             return {
@@ -76,10 +84,43 @@ export default function WarehousePage() {
         })
     }
 
-    const onSubmitData = () => {
-        console.log('newProduct', newProduct)
+    // check required
+    const isRequired = (name, value) => {
+        return _.isEmpty(value)
+            ? { [name]: `Please fill all the required input` }
+            : {}
     }
 
+    // check type number
+    const isTypeNumber = (name, value) => {
+        return (typeof value !== 'number')
+            ? { [name]: "Must enter number" }
+            : {}
+    }
+
+    // handle submit data
+    const onSubmitData = () => {
+        const error = {
+            ...isRequired("productName", newProduct.productName),
+            ...isRequired("productCategory", newProduct.productCategory),
+            ...isRequired("supplier", newProduct.supplier),
+            ...isTypeNumber("price", newProduct.price),
+            ...isTypeNumber("quantity", newProduct.quantity),
+        }
+
+        if (error) {
+            const errorMessage = _.uniq(Object.values(error));
+            errorMessage.map(item => message.error(item))
+        } else {
+            const body = {
+                ...newProduct,
+                createdAt: new Date()
+            }
+            console.log('newProduct', body)
+        }
+    }
+
+    // render modal
     const renderModal = () => {
         return (
             <div className="add-new-modal">
@@ -145,6 +186,7 @@ export default function WarehousePage() {
         )
     }
 
+    // handle search
     const onSearch = (value) => {
         setIsSearching(true)
         axiosService
@@ -157,6 +199,7 @@ export default function WarehousePage() {
             })
     }
 
+    // handle clear search
     const clearSearch = () => {
         setIsSearching(false);
         searchRef.current.state.value = "";
