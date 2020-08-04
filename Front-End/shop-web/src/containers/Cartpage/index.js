@@ -6,9 +6,9 @@ import Button1 from "../../components/Button";
 import Loading from "../../components/Loading";
 import { removeAllCartProducts, removeFromCart, purchaseProduct, purchaseAllProduct, confirmPurchase } from "../../action/action";
 import BreadCrumb from "../../components/Breadcrumb";
-import columns from "./cartTableCols";
 import CartItem from "./CartItem";
 import { useTranslation } from "react-i18next";
+import TableColumn from "./cartTableCols";
 
 export default function CartPage() {
     const [visible, setVisible] = useState(false);
@@ -76,7 +76,7 @@ export default function CartPage() {
             to: "/",
         },
     ];
-
+    const columns = TableColumn();
     return (
         <div className="cartPage">
             {loading && <Loading />}

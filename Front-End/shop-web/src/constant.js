@@ -30,8 +30,8 @@ export const MENU = [
     },
     {
         id: 4,
-        name: "products",
-        to: "/products",
+        name: "warehouse",
+        to: "/warehouse",
         exact: false,
         isAdmin: true,
         isHome: false,

@@ -1,0 +1,21 @@
+@import '../../utils/Color.scss';
+
+.warehousepage {
+    .content {
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .warehouse-table-row:hover {
+            cursor: pointer;
+        }
+
+        .searchfield {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+}
