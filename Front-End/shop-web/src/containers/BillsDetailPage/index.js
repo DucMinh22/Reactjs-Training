@@ -104,9 +104,7 @@ function BillsDetail(props) {
       <div className="row">
         <div className="Status">
           <Select
-            // defaultValue="Shipping"
             style={{ width: 120 }}
-            // onChange={handleChange}
             value={statusbill}
             onChange={(event) => isChange(event)}
           >
