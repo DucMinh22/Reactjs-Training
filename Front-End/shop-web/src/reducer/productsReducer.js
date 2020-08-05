@@ -10,6 +10,7 @@ import {
   REMOVE_BILLS,
   SEARCH_BILLS,
   UPDATE_STATE_BILLS,
+  UPDATE_PRODUCTS,
 } from "../action/actionTypes";
 
 const initialState = {
@@ -22,6 +23,7 @@ const initialState = {
   stateBills: [],
   searchbills: [],
   updateStateBills: [],
+  productUpdate: [],
 };
 
 const productsReducer = (state = initialState, action) => {
@@ -30,19 +32,19 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: true,
-      }
+      };
     case GET_ALL_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: action.payload,
         loading: false,
-      }
+      };
     case GET_ALL_PRODUCTS_FAILURE:
       return {
         ...state,
         error: action.payload,
         loading: false,
-      }
+      };
     case GET_INFO_PRODUCTS:
       return {
         ...state,
@@ -78,6 +80,11 @@ const productsReducer = (state = initialState, action) => {
       return {
         ...state,
         updateStateBills: action.payload,
+      };
+    case UPDATE_PRODUCTS:
+      return {
+        ...state,
+        productUpdate: action.payload,
       };
     case REMOVE_BILLS:
       const prbill = [...state.bills].filter(

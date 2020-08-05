@@ -1,6 +1,6 @@
-import React from 'react'
-import moment from 'moment'
-import { useTranslation } from 'react-i18next'
+import React from "react";
+import moment from "moment";
+import { useTranslation } from "react-i18next";
 const TableColumns = () => {
     const { t } = useTranslation('common');
     const columns = [
@@ -55,7 +55,7 @@ const TableColumns = () => {
         },
     ]
 
-    return columns
-}
+    return columns;
+};
 
 export default TableColumns;
