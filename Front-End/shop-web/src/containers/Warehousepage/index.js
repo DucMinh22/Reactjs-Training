@@ -13,6 +13,7 @@ import axiosService from '../../utils/axiosService'
 import { ENDPOINT, GET_PRODUCTS_API } from '../../constant'
 import { CloseOutlined } from '@ant-design/icons'
 import * as _ from 'lodash'
+import { isRequired, isTypeNumber } from '../../utils/validation'
 
 const { Search } = Input;
 
@@ -85,21 +86,6 @@ export default function WarehousePage() {
             }
         })
     }, [])
-
-    // check required
-    const isRequired = (name, value) => {
-        return _.isEmpty(value)
-            ? { [name]: `Please fill all the required input` }
-            : {}
-    }
-
-    // check type number
-    const isTypeNumber = (name, value) => {
-        const regex = /^[0-9]*$/;
-        return (!regex.test(value))
-            ? { [name]: "Must enter number" }
-            : {}
-    }
 
     // handle submit data
     const onSubmitData = () => {

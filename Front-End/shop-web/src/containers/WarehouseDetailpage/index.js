@@ -5,7 +5,7 @@ import {
     ENDPOINT,
     GET_PRODUCTS_API,
 } from "../../constant";
-import { Col, Row, Button, message } from "antd";
+import { Col, Row, message } from "antd";
 import {
     getInfoProducts,
     getAllCategories,
@@ -16,6 +16,7 @@ import { useRouteMatch } from "react-router-dom";
 import ModalInput from "../../components/ModalInput";
 import { useTranslation } from "react-i18next";
 import Loading from "../../components/Loading";
+import Button from '../../components/Button';
 
 function WarehouseDetailPage() {
     const [loading, setLoading] = useState(false);
@@ -179,7 +180,7 @@ function WarehouseDetailPage() {
                     </Row>
 
                     <Col xl={11} md={10} sm={12}>
-                        <Button type="primary" onClick={handleUpdate} htmlType="submit">
+                        <Button type="primary" onClick={handleUpdate}>
                             {loading ? "Loading..." : t(`warehouseDetail.input.update`)}
                         </Button>
                     </Col>
