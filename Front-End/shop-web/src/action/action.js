@@ -17,6 +17,7 @@ import {
   REMOVE_BILLS,
   SEARCH_BILLS,
   UPDATE_STATE_BILLS,
+  UPDATE_PRODUCTS,
 } from "./actionTypes";
 
 export const getAllProducts = () => {
@@ -133,7 +134,12 @@ export const updateStateBills = (status) => {
     payload: status,
   };
 };
-
+export const UpdateProducts = (product) => {
+  return {
+    type: UPDATE_PRODUCTS,
+    payload: product,
+  };
+};
 export const updateCart = (product) => {
   return {
     type: UPDATE_CART_PRODUCT,
