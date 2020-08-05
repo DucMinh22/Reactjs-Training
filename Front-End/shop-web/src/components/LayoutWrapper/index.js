@@ -19,7 +19,7 @@ export default function Layout({ component, getProps, ...rest }) {
     useEffect(() => {
         window.addEventListener("scroll", onScroll);
         return () => {
-            window.removeEventListener("scroll")
+            window.removeEventListener("scroll", this)
         }
     }, [])
 

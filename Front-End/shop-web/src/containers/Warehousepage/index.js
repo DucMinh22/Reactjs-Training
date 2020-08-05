@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useCallback } from 'react'
 import Button from '../../components/Button'
 import Loading from '../../components/Loading'
 import './index.scss'
@@ -18,6 +18,7 @@ const { Search } = Input;
 
 export default function WarehousePage() {
     const [visible, setVisible] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [isSearching, setIsSearching] = useState(false);
     const [newProduct, setNewProduct] = useState({
         productName: "",
@@ -63,7 +64,7 @@ export default function WarehousePage() {
     }
 
     // handle change input
-    const onChangeInput = e => {
+    const onChangeInput = useCallback(e => {
         const name = e.target.name;
         const value = e.target.value;
 
@@ -73,17 +74,17 @@ export default function WarehousePage() {
                 [name]: value
             }
         })
-    }
+    }, [])
 
     // handle change select
-    const onChangeSelect = (value) => {
+    const onChangeSelect = useCallback((value) => {
         setNewProduct(prev => {
             return {
                 ...prev,
                 productCategory: value
             }
         })
-    }
+    }, [])
 
     // check required
     const isRequired = (name, value) => {
@@ -111,7 +112,7 @@ export default function WarehousePage() {
             ...isTypeNumber("quantity", newProduct.quantity),
         }
 
-        if (error) {
+        if (!_.isEmpty(error)) {
             const errorMessage = _.uniq(Object.values(error));
             errorMessage.map(item => message.error(item))
         } else {
@@ -119,7 +120,15 @@ export default function WarehousePage() {
                 ...newProduct,
                 createdAt: new Date()
             }
-            console.log('newProduct', body)
+            setIsLoading(true)
+            axiosService.post(`${ENDPOINT}${GET_PRODUCTS_API}`, body)
+                .then(res => {
+                    if (res.data) {
+                        message.success("Create successfully")
+                    }
+                })
+                .catch(err => message.error("Server Error"))
+                .finally(() => setIsLoading(false))
         }
     }
 
@@ -201,7 +210,7 @@ export default function WarehousePage() {
     }
 
     // handle search
-    const onSearch = (value) => {
+    const onSearch = useCallback((value) => {
         setIsSearching(true)
         axiosService
             .get(`${ENDPOINT}${GET_PRODUCTS_API}?search=${value}`)
@@ -211,13 +220,13 @@ export default function WarehousePage() {
             .catch((error) => {
                 console.log("Error fetching and parsing data", error);
             })
-    }
+    }, [dispatch])
 
     // handle clear search
-    const clearSearch = () => {
+    const clearSearch = useCallback(() => {
         setIsSearching(false);
         searchRef.current.state.value = "";
-    }
+    }, [])
 
     return (
         <div className="warehousepage">
@@ -247,7 +256,7 @@ export default function WarehousePage() {
                     visible={visible}
                     onOk={onSubmitData}
                     onCancel={handleOpenCloseModal}
-                    okText={t(`warehousepage.modal.ok`)}
+                    okText={isLoading ? 'Loading ...' : t(`warehousepage.modal.ok`)}
                     cancelText={t(`warehousepage.modal.cancel`)}
                     closable={false}
                     width={'60%'}

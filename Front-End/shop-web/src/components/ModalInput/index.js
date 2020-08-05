@@ -7,7 +7,7 @@ import './index.scss';
 const { Option } = Select
 
 // Input in Modal Add New Asset
-const ModalInput = ({
+const ModalInput = React.memo(({
     label,
     label2,
     required,
@@ -97,6 +97,6 @@ const ModalInput = ({
             </div>
         )
     }
-}
+})
 
 export default ModalInput

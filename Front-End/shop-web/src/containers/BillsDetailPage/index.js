@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { Select, Table, Button, message } from "antd"
 import { useRouteMatch } from "react-router-dom"
 import axiosService from "../../utils/axiosService"
@@ -6,9 +6,9 @@ import { ENDPOINT, GET_BILL_API } from "../../constant"
 import { useDispatch, useSelector } from "react-redux"
 import { getProductBills, updateStateBills } from "../../action/action"
 import Loading from '../../components/Loading'
-import moment from "moment"
 import "./index.scss"
 import { useTranslation } from "react-i18next"
+import TableColumns from "./billDetailColumns"
 const { Option } = Select;
 
 function BillsDetail() {
@@ -32,9 +32,10 @@ function BillsDetail() {
         fetch();
     }, [dispatch, id]);
 
-    const isChange = (value) => {
+    const onChangeStatus = useCallback((value) => {
         setStatusbills(value);
-    };
+    }, [])
+
     const updateStateBill = () => {
         const body = {
             ...productsbill,
@@ -44,46 +45,13 @@ function BillsDetail() {
             dispatch(updateStateBills(res.data));
             message.success("Updated successfully !!!")
         });
-    };
-
-    const columns = [
-        {
-            title: t(`billDetailPage.table.number`),
-            dataIndex: "id",
-            sorter: (a, b) => a.id - b.id,
-            render: (text, record) => {
-                return <div style={{ cursor: "pointer" }}>{record.id}</div>;
-            },
-        },
-        {
-            title: t(`billDetailPage.table.date`),
-            dataIndex: "createdAt",
-            render: (text, record) => {
-                const time = moment(record.createdAt).format("DD/MM/YYYY");
-                return <div>{time}</div>;
-            },
-        },
-        {
-            title: t(`billDetailPage.table.productName`),
-            dataIndex: "name",
-        },
-        {
-            title: t(`billDetailPage.table.productCategory`),
-            dataIndex: "category",
-        },
-        {
-            title: t(`billDetailPage.table.price`),
-            dataIndex: "price",
-        },
-        {
-            title: t(`billDetailPage.table.quantity`),
-            dataIndex: "quantity",
-        }
-    ];
+    }
 
     function onChange(pagination, filters, sorter, extra) {
         console.log("params", pagination, filters, sorter, extra);
     }
+
+    const columns = TableColumns()
 
     return (
         <div>
@@ -100,7 +68,7 @@ function BillsDetail() {
                     <Select
                         style={{ width: 120 }}
                         value={statusbill}
-                        onChange={(event) => isChange(event)}
+                        onChange={onChangeStatus}
                     >
                         <Option value="Shipping">{t(`billDetailPage.select.shipping`)}</Option>
                         <Option value="Incart">{t(`billDetailPage.select.inCart`)}</Option>

@@ -20,6 +20,7 @@ const TableColumns = () => {
             key: 3,
             title: t('warehousepage.table.productCategory'),
             dataIndex: 'category',
+            sorter: (a, b) => a.category.localeCompare(b.category),
             width: 150,
         },
         {
@@ -45,6 +46,7 @@ const TableColumns = () => {
             title: t('warehousepage.table.date'),
             dataIndex: 'createdAt',
             width: 50,
+            sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
             render: (value, record) => {
                 return (
                     <span>{moment(value).format('DD/MM/YYYY')}</span>
