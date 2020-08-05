@@ -110,6 +110,18 @@
             "done": "Hoàn Thành"
         }
     },
+    "warehouseDetail": {
+        "title": "Thay đổi thông tin sản phẩm trong kho",
+        "input": {
+            "productName": "Tên Sản Phẩm",
+            "productCategory": "Loại Sản Phẩm",
+            "supplier": "Nhà Cung Cấp",
+            "price": "Giá",
+            "quantity": "Số Lượng",
+            "description": "Mô Tả",
+            "update": "Thay đổi"
+        }
+    },
     "signIn": "Đăng Nhập",
     "signUp": "Đăng Ký",
     "signOut": "Đăng Xuất",

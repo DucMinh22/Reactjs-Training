@@ -110,6 +110,18 @@
             "done": "Done"
         }
     },
+    "warehouseDetail": {
+        "title": "Update Product in Warehouse",
+        "input": {
+            "productName": "Product Name",
+            "productCategory": "Product Category",
+            "supplier": "Supplier",
+            "price": "Price",
+            "quantity": "Quantity",
+            "description": "Description",
+            "update": "Update"
+        }
+    },
     "signIn": "Sign In",
     "signUp": "Sign Up",
     "signOut": "Sign Out",
