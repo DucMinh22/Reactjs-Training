@@ -61,7 +61,7 @@ function BillsDetail() {
             </div>
             <div className="info">
                 <div className="info-detail">
-                    <p>{t(`billDetailPage.user`)}: {productsbill.username}</p>
+                    <p>{t(`billDetailPage.user`)}: <span style={{ textTransform: 'uppercase' }}>{productsbill.username}</span></p>
                     <p>{t(`billDetailPage.total`)}: </p>
                 </div>
                 <div className="Status">

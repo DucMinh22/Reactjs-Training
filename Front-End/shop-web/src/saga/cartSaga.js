@@ -7,7 +7,7 @@ import Cookies from 'js-cookie';
 function* purchaseProduct(action) {
     const { product } = action;
     const newProduct = { ...product, status: 'shipping' };
-    const name = Cookies.get("name");
+    const name = localStorage.getItem("name")
     let purchaseCart = yield select(state => state.cart.purchaseProducts);
     const body = {
         username: name,
@@ -45,7 +45,8 @@ function* purchaseAll() {
         }
     })
     let purchaseItems = yield select(state => state.cart.purchaseProducts);
-    const name = Cookies.get("name");
+    const name = localStorage.getItem("name")
+    console.log(name)
     const body = {
         username: name,
         bills: [...updateCart, ...purchaseItems],
@@ -73,7 +74,7 @@ function* purchaseAll() {
 
 function* confirmPayment() {
     let purchaseItems = yield select(state => state.cart.purchaseProducts);
-    const name = Cookies.get("name");
+    const name = localStorage.getItem("name")
     let body = {
         usename: name,
         bills: [...purchaseItems],

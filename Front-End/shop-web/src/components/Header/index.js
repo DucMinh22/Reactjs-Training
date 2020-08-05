@@ -13,7 +13,7 @@ import { ENDPOINT, GET_PRODUCTS_API } from "../../constant";
 import { useTranslation } from "react-i18next";
 import { MENU } from '../../constant';
 import MenuMobile from "../MenuMobile";
-
+import Cookies from 'js-cookie';
 
 export default function Header() {
     const [visible, setVisible] = useState(false);
@@ -32,6 +32,7 @@ export default function Header() {
         window.location.href = "/";
         localStorage.removeItem("name");
         localStorage.removeItem("role");
+        Cookies.remove("billId")
     };
     const handleCancel = () => {
         setVisible(false);
