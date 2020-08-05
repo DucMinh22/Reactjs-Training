@@ -17,6 +17,8 @@ import ModalInput from "../../components/ModalInput";
 import { useTranslation } from "react-i18next";
 import Loading from "../../components/Loading";
 import Button from '../../components/Button';
+import * as _ from "lodash";
+import { isRequired, isTypeNumber } from "../../utils/validation";
 
 function WarehouseDetailPage() {
     const [loading, setLoading] = useState(false);
@@ -60,8 +62,6 @@ function WarehouseDetailPage() {
     const onChangeInput = (e) => {
         const name = e.target.name;
         const value = e.target.value;
-        console.log(name);
-        console.log(value);
         setNewProduct({
             ...newProduct,
             [name]: value,
@@ -76,31 +76,37 @@ function WarehouseDetailPage() {
             };
         });
     };
+
     // handle update
     const handleUpdate = () => {
-        const body = {
-            ...newProduct,
+        const error = {
+            ...isRequired("productName", newProduct.name),
+            ...isRequired("productCategory", newProduct.category),
+            ...isRequired("supplier", newProduct.supplier),
+            ...isRequired("description", newProduct.description),
+            ...isTypeNumber("price", newProduct.price),
+            ...isTypeNumber("quantity", newProduct.quantity),
         };
-        setLoading(true);
-        axiosService
-            .put(`${ENDPOINT}${GET_PRODUCTS_API}/${id}`, body)
-            .then((res) => {
-                message.success("Add to cart successfully");
-                dispatch(UpdateProducts(res.data));
-                console.log("Update Success");
-                setNewProduct({
-                    name: "",
-                    category: "",
-                    price: "",
-                    supplier: "",
-                    quantity: "",
-                    description: "",
-                });
-            })
-            .catch((error) => {
-                message.error("Server Error")
-            })
-            .finally(() => setLoading(false));
+        console.log(error);
+        if (!_.isEmpty(error)) {
+            const errorMessage = _.uniq(Object.values(error));
+            errorMessage.map((item) => message.error(item));
+        } else {
+            const body = {
+                ...newProduct,
+            };
+            setLoading(true);
+            axiosService
+                .put(`${ENDPOINT}${GET_PRODUCTS_API}/${id}`, body)
+                .then((res) => {
+                    message.success("Edit product successfully");
+                    dispatch(UpdateProducts(res.data));
+                })
+                .catch((error) => {
+                    message.error("Server Error");
+                })
+                .finally(() => setLoading(false));
+        }
     };
     return (
         <div>
@@ -178,9 +184,8 @@ function WarehouseDetailPage() {
                             />
                         </Col>
                     </Row>
-
                     <Col xl={11} md={10} sm={12}>
-                        <Button type="primary" onClick={handleUpdate}>
+                        <Button type="primary" onClick={handleUpdate} htmlType="submit">
                             {loading ? "Loading..." : t(`warehouseDetail.input.update`)}
                         </Button>
                     </Col>
